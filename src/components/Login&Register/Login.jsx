@@ -3,11 +3,20 @@ import React from 'react';
 // Conmponents --------------------------------------
 import Input from '../Input';
 
-const Login = props => {
+const Login = ( { handleGetValueInput } ) => {
     return (
         <div>
-            <Input 
+            <Input
+                placeholder = { 'Nombre' }
+                 
             />            
+            <Input
+                type        = { 'password' }
+                placeholder = { 'Password' }
+                handleGetValueInput = { handleGetValueInput }
+
+            />            
+
         </div>
     );
 };

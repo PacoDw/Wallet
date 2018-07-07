@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
 
-// Conmponents --------------------------------------
-import Input from './components/Input';
-
+import Login from './components/Login&Register';
 
 class App extends Component {
+    constructor(props){
+        super(props);
+
+        this.state = {
+			user : '' 
+		 }
+    }
+
+
 	render() {
 		return (
-			<div>
-				<Input />
+			<div className='container'>
+				<Login />
 			</div>
 		);
 	}
