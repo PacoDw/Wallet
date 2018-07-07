@@ -1,14 +1,14 @@
 import React from 'react';
 
-const Input = ( { type, placeholder, handleGetValueInput } ) => {
+const Input = ( { type, placeholder, value, handleGetValueInput } ) => {
     return (
-        <div class="mui-textfield">
+        <div className="mui-textfield mui-textfield--float-label">
             <input 
-                type        = { type        || 'text'}
-                placeholder = { placeholder || 'Sin nombre' }
+                type        = { type || 'text'}
                 onChange    = { handleGetValueInput }
-                value       = ''
+                value       = { value }
             />
+            <label>{ placeholder || 'Sin nombre' }</label>
         </div>
     );
 };
