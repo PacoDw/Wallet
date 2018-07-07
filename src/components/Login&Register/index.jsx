@@ -24,12 +24,13 @@ class index extends React.Component {
                     <div className="mui-tabs__pane mui--is-active panel-login" id="pane-default-1">
                         <Login 
                             handleGetValueInput = { this.handleGetValueInput }
-                            loginUser = { this.props.loginUser }
+                            loginUser           = { this.props.loginUser }
                         />
                     </div>
                     <div className="mui-tabs__pane panel-register" id="pane-default-2">
                         <Register 
                             handleGetValueInput = { this.handleGetValueInput }
+                            registerUser        = { this.props.registerUser }
                         />
                     </div>
             </div>

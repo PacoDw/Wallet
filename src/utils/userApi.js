@@ -11,7 +11,7 @@ UserApi.loginUser = function(dataForm) {
             .then( response => {
                 console.log('API RESPONSE: ', response);
                 if (response.ok)
-                    return response.json();
+                    return response;
                 else
                     return Promise.reject(response.json);
             })

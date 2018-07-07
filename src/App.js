@@ -16,7 +16,26 @@ class App extends Component {
 			showDesktop : false
 
 		 }
+
+		 this.handleLoginUser    = this.handleLoginUser.bind(this);
+		 this.handleRegisterUser = this.handleRegisterUser.bind(this);
     }
+
+	handleRegisterUser(e){
+		e.preventDefault();
+
+		let formulario = document.querySelector('#RegisterForm');
+
+		onGetForm(formulario, ( dataForm ) => {
+				
+			Api.User
+				.addUser( dataForm )
+
+				.then( data => {
+					this.setState( { user : data.user,  showDesktop : true } )
+				})
+		})
+	}
 
 	handleLoginUser(e) {
 		e.preventDefault();
@@ -30,7 +49,10 @@ class App extends Component {
 
 				.then( data => {
 					this.setState( { user : data.user,  showDesktop : true } )
+
 				})
+
+				.catch(err => console.log('ERROR: ', err));
 		})
 	}
 
@@ -42,7 +64,8 @@ class App extends Component {
 		else
 			showSome = <div className='container container-Login'>	
 				<LoginAndRegister 
-					loginUser = { this.handleLoginUser }
+					loginUser    = { this.handleLoginUser    }
+					registerUser = { this.handleRegisterUser }
 				/> 
 			</div>
 				  
