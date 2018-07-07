@@ -10,15 +10,23 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
+    "bootstrap": "^4.1.1",
+    "chart.js": "^2.7.2",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "~4.16.0",
+    "fusioncharts": "^3.12.2",
     "http-errors": "~1.6.2",
     "jade": "~1.11.0",
     "morgan": "~1.9.0",
+<<<<<<< HEAD
     "nodemon": "^1.17.5",
+=======
+    "muicss": "^0.9.39",
+>>>>>>> ddad691b5b9008a6362bf88643ca8abd8980871a
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
+    "react-fusioncharts": "^1.0.5",
     "react-scripts": "1.1.4"
   }
 }

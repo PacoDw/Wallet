@@ -1,21 +1,34 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+import LoginAndRegister from './components/Login&Register';
+import Desktop from './components/Desktop';
+import Chart from './components/Charts'
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
+    constructor(props){
+        super(props);
+
+        this.state = {
+			user : '' 
+		 }
+    }
+
+
+	render() {
+		let showSome = ''
+		if (this.state.user === '')
+			showSome = <Desktop />
+		else
+			showSome = <div className='container container-Login'>	
+				<LoginAndRegister /> 
+			</div>
+				  
+		return (
+			<div>
+					{showSome}
+			</div>
+		);
+	}
 }
 
 export default App;
