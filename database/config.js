@@ -5,7 +5,6 @@ let db = mysql.createConnection({
     user        : 'Admin',
     password    : '301198050913',
     database    : 'wallet',
-    // port        : 3305,
     dateStrings : true
 });
 
