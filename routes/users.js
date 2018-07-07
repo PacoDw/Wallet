@@ -32,7 +32,7 @@ router
 			})
 
 
-			.post('/addUser', (req, res, next) => {
+			.post('/addUser', (req, res, next) => {console.log('Data login: ', data);
 				let user = {
 					id_user : 0,
 					email: req.body.email,

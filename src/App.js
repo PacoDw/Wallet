@@ -12,9 +12,30 @@ class App extends Component {
         super(props);
 
         this.state = {
-			user : props.user
+			user        : '',
+			showDesktop : false
+
 		 }
+
+		 this.handleLoginUser    = this.handleLoginUser.bind(this);
+		 this.handleRegisterUser = this.handleRegisterUser.bind(this);
     }
+
+	handleRegisterUser(e){
+		e.preventDefault();
+
+		let formulario = document.querySelector('#RegisterForm');
+
+		onGetForm(formulario, ( dataForm ) => {
+				
+			Api.User
+				.addUser( dataForm )
+
+				.then( data => {
+					this.setState( { user : data.user,  showDesktop : true } )
+				})
+		})
+	}
 
 	handleLoginUser(e) {
 		e.preventDefault();
@@ -23,33 +44,34 @@ class App extends Component {
 
 		onGetForm(formulario, ( dataForm ) => {
 				
-			Api.Seller
-				.addSeller( dataForm )
+			Api.User
+				.loginUser( dataForm )
 
 				.then( data => {
-					document.querySelector('#closeSellerForm').click();
-
-					let id_office_manager = this.state.id_office_manager;
+					this.setState( { user : data.user,  showDesktop : true } )
 
 				})
 
+				.catch(err => console.log('ERROR: ', err));
 		})
 	}
 
 	render() {
-		let showSome = ''
-		if (this.state.user === '')
+		let showSome = '';
+
+		if (this.state.showDesktop)
 			showSome = <Desktop />
 		else
 			showSome = <div className='container container-Login'>	
 				<LoginAndRegister 
-					loginUser = { this.handleLoginUser }
+					loginUser    = { this.handleLoginUser    }
+					registerUser = { this.handleRegisterUser }
 				/> 
 			</div>
 				  
 		return (
 			<div>
-					{showSome}
+					{ showSome }
 			</div>
 		);
 	}

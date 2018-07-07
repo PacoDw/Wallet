@@ -1,44 +1,12 @@
 import Api from './api';
 
-function UserApi(){}
+function OutcomeApi(){}
 
-UserApi.loginUser = function(dataForm) {
- 
-    return Promise.resolve (
-        Api
-            .post('/users/loginUser', dataForm)
-
-            .then( response => {
-                console.log('API RESPONSE: ', response);
-                if (response.ok)
-                    return response;
-                else
-                    return Promise.reject(response.json);
-            })
-    )
-}
-
-UserApi.getUser = function( id ) {
+OutcomeApi.getOutcomeFixed = function( id ) {
 
     return Promise.resolve (
         Api
-            .get(`/users/user/${id}`)
-
-            .then( response => {
-                console.log('API RESPONSE GET USER: ', response);
-                if (response.ok)
-                    return response.json();
-                else
-                    return Promise.reject(response.json);
-            })
-    )
-}
-
-UserApi.addUser = function(dataForm) {
-
-    return Promise.resolve (
-        Api
-            .post('/users/addUser', dataForm)
+            .get(`/outcome/getOutcomeFixed/${id}`)
 
             .then( response => {
                 console.log('API RESPONSE: ', response);
@@ -50,20 +18,37 @@ UserApi.addUser = function(dataForm) {
     )
 }
 
-UserApi.deleteUser = function( id ) {
+OutcomeApi.getOutcomeIncidental = function( id ) {
 
-    return Promise.resolve( 
+    return Promise.resolve (
         Api
-            .delete(`/users/deleteUser/${id}`)
+            .get(`/outcome/getOutcomeIncidental/${id}`)
 
             .then( response => {
-                console.log('API RESPONSE DELETE: ', response);
+                console.log('API RESPONSE: ', response);
                 if (response.ok)
                     return response.json();
                 else
                     return Promise.reject(response.json);
             })
-        )
+    )
 }
 
-export default UserApi;
+OutcomeApi.addOutcome = function(dataForm) {
+
+    return Promise.resolve (
+        Api
+            .post('/outcome/addOutcome', dataForm)
+
+            .then( response => {
+                console.log('API RESPONSE: ', response);
+                if (response.ok)
+                    return response.json();
+                else
+                    return Promise.reject(response.json);
+            })
+    )
+}
+
+
+export default OutcomeApi;
