@@ -1,15 +1,15 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET users listing. */
 router
+
 			.get('/', function (req, res, next) {
-				res.status(200).json({ ok: 'ok' });
+				res.status(200).json({ users: 'users' });
 			})
 
 
-			.get('/user', (req, res, next) => {
-				id = req.body.id;
+			.get('/user/:id', (req, res, next) => {
+				let id = req.params.id;
 				const db = require('../database/config');
 				db.query('select from users where id_user =  ?', id, (err, rows, fields) => {
 
@@ -18,10 +18,10 @@ router
 
 
 			.post('/addsUser', (req, res, next) => {
-				// user = {
-				// 	username = req.body.username,
-				// 	password = req.body.password
-				// }
+				user = {
+					username : req.body.username,
+					password : req.body.password
+				}
 				const db = require('../database/config');
 				db.query('insert into users ?', user, (err, rows, fields) => {
 					if (err) {
@@ -47,4 +47,4 @@ router
 
 
 
-		module.exports = router;
+module.exports = router;
