@@ -37,7 +37,7 @@ router
 					req.body.amount,
 					req.body.description,
 					req.body.date,
-					req.body.id_frecuency,
+					req.body.id_frequency,
 					req.params.id
 				]	
 				
