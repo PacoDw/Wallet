@@ -1,16 +1,43 @@
 import React, { Component } from 'react';
 import Header     from '../Header'
 import SideDrawer from '../Sidedrawer'
+import Modal      from '../Modal';
 
 class index extends Component {
     constructor(props) {
 		super(props);
 
-		this.handleShowSideDrawer = this.handleShowSideDrawer.bind(this);
-        this.handleHideSideDrawer = this.handleHideSideDrawer.bind(this);
+		this.state = {
+			showModal : false,
+			option    : '',
+			value     : ''
+		}
+
+		this.handleShowSideDrawer  = this.handleShowSideDrawer.bind(this);
+        this.handleHideSideDrawer  = this.handleHideSideDrawer.bind(this);
         this.handleTittle          = this.handleTittle.bind(this);
 		
+		this.handleShowModal = this.handleShowModal.bind(this);
+		this.handleCloseModal = this.handleCloseModal.bind(this);
+
+		this.handleGetValueInput = this.handleGetValueInput.bind(this);
 	}
+
+	handleGetValueInput(e) {
+        e.preventDefault();
+        this.setState( { value : e.target.value } );
+    }
+
+	handleShowModal(e) {
+		e.preventDefault();
+		this.setState( { showModal : true, option : e.target.text } );
+
+	}
+	handleCloseModal (e) {
+		e.preventDefault();
+		this.setState( { showModal : false } );
+	}
+	
 
     handleShowSideDrawer(e) {
         e.preventDefault();
@@ -34,10 +61,13 @@ class index extends Component {
     } 
     
     render() {
+		console.log('Modal : ', this.state.showModal);
+
         return (
             <div>
                 <SideDrawer
-                handleTittle = { this.handleTittle }
+					handleTittle    = { this.handleTittle }
+					handleShowModal = { this.handleShowModal } 
                 />
 
 				<Header 
@@ -50,21 +80,11 @@ class index extends Component {
 						<div className='mui-panel'>
 							<br/>
 							<h1>My Wallet</h1>
-							<p>
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris
-								sollicitudin volutpat molestie. Nullam id tempor nulla. Aenean sit amet
-								urna et elit pharetra consequat. Aliquam fringilla tortor vitae lectus
-								tempor, tempor bibendum nunc elementum. Etiam ultrices tristique diam,
-								vitae sodales metus bibendum id. Suspendisse blandit ligula eu fringilla
-								pretium. Mauris dictum gravida tortor eu lacinia. Donec purus purus,
-								ornare sit amet consectetur sed, dictum sitamet ex. Vivamus sit amet
-								imperdiet tellus. Quisque ultrices risus a massa laoreet, vitae tempus sem
-								congue. Maecenas nec eros ut lectus vehicula rutrum. Donec consequat
-								tincidunt arcu non faucibus. Duis elementum, ante venenatis lacinia
-								cursus, turpis massa congue magna, sed dapibus felis nibh sed tellus. Nam
-								consectetur non nibh vitae sodales. Pellentesque malesuada dolor nec mi
-								volutpat, eget vehicula eros ultrices.
-							</p>
+							<Modal 
+								showModal        = { this.state.showModal  }
+								handleCloseModal = { this.handleCloseModal }
+								option           = { this.state.option }
+							/>
 						</div>
 					</div>
 				</div>
