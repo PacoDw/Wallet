@@ -1,5 +1,9 @@
 import React from 'react';
 
+// Components ------------------------------------------
+import Login     from './Login';
+import Register  from './Register';
+
 
 class index extends React.Component {
     constructor(props){
@@ -9,24 +13,33 @@ class index extends React.Component {
             value : ''
         }
 
-        // this.handleGetValueInput = this.handleGetValueInput.bind(this);
+        this.handleGetValueInput = this.handleGetValueInput.bind(this);
     }
 
-    // handleGetValueInput(e) {
-    //     e.preventDefault();
-        
-    //     this.setState( { value : event.target.value } );
-    // }
+    handleGetValueInput(e) {
+        e.preventDefault();
+        this.setState( { value : e.target.value } );
+    }
 
     render() {
         return (
-            <div className = 'container'>
-                <ul class="mui-tabs__bar">
-                    <li class="mui--is-active"><a data-mui-toggle="tab" data-mui-controls="pane-default-1">Login</a></li>
+            <div className = 'mui-panel'>
+                <ul className="mui-tabs__bar">
+                    <li className="mui--is-active"><a data-mui-toggle="tab" data-mui-controls="pane-default-1">Login</a></li>
                     <li><a data-mui-toggle="tab" data-mui-controls="pane-default-2">Register</a></li>
                 </ul>
-                    <div class="mui-tabs__pane mui--is-active" id="pane-default-1">Pane-1</div>
-                    <div class="mui-tabs__pane" id="pane-default-2">Pane-2</div>
+                    <div className="mui-tabs__pane mui--is-active panel-login" id="pane-default-1">
+                        <Login 
+                            handleGetValueInput = { this.handleGetValueInput }
+                            value = { this.state.value }
+                        />
+                    </div>
+                    <div className="mui-tabs__pane panel-register" id="pane-default-2">
+                        <Register 
+                            handleGetValueInput = { this.handleGetValueInput }
+                            value = { this.state.value }
+                        />
+                    </div>
             </div>
         );        
     }
