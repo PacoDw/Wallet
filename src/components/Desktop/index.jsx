@@ -7,7 +7,8 @@ class index extends Component {
 		super(props);
 
 		this.handleShowSideDrawer = this.handleShowSideDrawer.bind(this);
-		this.handleHideSideDrawer = this.handleHideSideDrawer.bind(this);
+        this.handleHideSideDrawer = this.handleHideSideDrawer.bind(this);
+        this.handleTittle          = this.handleTittle.bind(this);
 		
 	}
 
@@ -25,10 +26,19 @@ class index extends Component {
         console.log("entro");
         document.querySelector('body').classList.toggle('hide-sidedrawer');
     }
+
+    handleTittle(e) {		
+		let ul = e.target.nextSibling;
+
+		ul.classList.toggle('hiden-items');
+    } 
+    
     render() {
         return (
             <div>
-                <SideDrawer/>
+                <SideDrawer
+                handleTittle = { this.handleTittle }
+                />
 
 				<Header 
 					showSidedrawer = { this.handleShowSideDrawer }

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const index = props => {
+const index = ({handleTittle}) => {
     return (
         <div id="sidedrawer" class="mui--no-user-select"> 
             <div id="sidedrawer-brand" className="mui--appbar-line-height">
@@ -9,23 +9,23 @@ const index = props => {
             <div className="mui-divider"></div>
             <ul>
                 <li>
-                    <strong>Category 1</strong>
+                    <strong onClick = { handleTittle }>Gastos</strong>
                     <ul>
-                        <li><a href="#">Item 1</a></li>
-                        <li><a href="#">Item 2</a></li>
-                        <li><a href="#">Item 3</a></li>
+                        <li><a href="#">Gastos Fijos</a></li>
+                        <li><a href="#">Gastos Imprevisto</a></li>
+                        <li><a href="#">Agregar gasto</a></li>
                     </ul>
                 </li>
                 <li>
-                    <strong>Category 2</strong>
+                    <strong onClick = { handleTittle }>Ingresos</strong>
                     <ul>
-                        <li><a href="#">Item 1</a></li>
-                        <li><a href="#">Item 2</a></li>
-                        <li><a href="#">Item 3</a></li>
+                        <li><a href="#">Ingresos Fijos</a></li>
+                        <li><a href="#">Ingresos Extras</a></li>
+                        <li><a href="#">Agregar Ingreso</a></li>
                     </ul>
                 </li>
                 <li>
-                    <strong>Category 3</strong>
+                <strong onClick = { handleTittle }>Configuración</strong>
                     <ul>
                         <li><a href="#">Item 1</a></li>
                         <li><a href="#">Item 2</a></li>

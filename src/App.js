@@ -15,7 +15,7 @@ class App extends Component {
 
 	render() {
 		let showSome = ''
-		if (this.state.user !== '')
+		if (this.state.user === '')
 			showSome = <Desktop />
 		else
 			showSome = <div className='container container-Login'>	
