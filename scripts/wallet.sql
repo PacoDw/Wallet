@@ -2,6 +2,17 @@ Create Database wallet2;
 use wallet2;
 
 
+select * from movements 
+where id_wallet = 1 AND id_movement_type = 1 OR id_movement_type = 2 group by id_wallet;
+
+Select * from movements where id_wallet = 1 AND id_movement_type = (SELECT id_movement_type WHERE id_movement_type between 1 AND 2);
+
+insert into users (email, `name`, `password`)values('eduardo@ucol.mx', 'Eduardooo', 'eduardo1');
+
+DELETE from users where id_user = 7;
+
+set foreign_key_checks = 0;
+
 -- select * from frequencys;
 Create Table frequencys(
 id_frequency int not null primary key auto_increment,
@@ -25,15 +36,7 @@ email Varchar(30),
 );
 
 
--- select * from wallets;
-Create Table wallets(
-    id_wallet int not null primary key auto_increment,
-    id_user int,
-    foreign key (id_user) references users(id_user)
-);
-
-
- select * from movements;
+-- select * from movements;
 Create Table movements(
     id_movement int not null primary key auto_increment,
     amount int,

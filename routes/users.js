@@ -32,15 +32,16 @@ router
 			})
 
 
-			.post('/addUser', (req, res, next) => {console.log('Data login: ', data);
-				let user = {
-					id_user : 0,
-					email: req.body.email,
-					name : req.body.username,
-					password : req.body.password
-				}
+			.post('/addUser', (req, res, next) => {
+				let user = [
+					req.body.email,
+					req.body.username,
+					req.body.password
+				]
+	
+				console.log(user);
 				const db = require('../database/config');
-				db.query('insert into users ?', user, (err, rows, fields) => {
+				db.query('insert into users (email, `name`, `password`)values(?,?,?);', user, (err, rows, fields) => {
 					if (err) {
 						res.status(500).json({ err });
 					} else {
@@ -52,6 +53,7 @@ router
 
 			.delete('/deleteUser/:id', (req, res, next) => {
 				let id = req.params.id;
+				// console.log(id);
 				const db = require('../database/config');
 				db.query('DELETE from users where id_user = ?', id, (err, rows, fields) => {
 					if (err) {

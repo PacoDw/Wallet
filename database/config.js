@@ -4,7 +4,7 @@ let db = mysql.createConnection({
     host        : '192.168.0.203',
     user        : 'Admin',
     password    : '301198050913',
-    database    : 'wallet',
+    database    : 'wallet2',
     dateStrings : true
 });
 
