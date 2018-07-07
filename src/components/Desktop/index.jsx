@@ -123,7 +123,6 @@ class index extends Component {
 					<div class="mui--appbar-height"></div>
 						<div class="mui-container-fluid">
 						<div className='mui-panel'>
-							<br/>
 							<h1>My Wallet</h1>
 							<Modal 
 								showModal        = { this.state.showModal  }
