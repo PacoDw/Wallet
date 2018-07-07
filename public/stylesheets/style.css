@@ -236,4 +236,10 @@
   right: 0;
   bottom: 0;
   background-color: #000c;
+/* Chart */
+}
+#chart-container {
+  display: flex;
+
+  justify-content: center;
 }

@@ -30,6 +30,9 @@ const index = ( { handleTittle, handleShowModal } ) => {
                         <li><a onClick = { handleShowModal } href="#">Item 1</a></li>
                         <li><a onClick = { handleShowModal } href="#">Item 2</a></li>
                         <li><a onClick = { handleShowModal } href="#">Item 3</a></li>
+                        <li><a href="#">Mi Perfil</a></li>
+                        <li><a href="#">Item 2</a></li>
+                        <li><a href="#">Cerrar sesión</a></li>
                     </ul>
                 </li>
             </ul>

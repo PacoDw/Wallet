@@ -2,8 +2,56 @@ import React, { Component } from 'react';
 import Header     from '../Header'
 import SideDrawer from '../Sidedrawer'
 import Modal      from '../Modal';
+import AddOutcome     from '../AddOutcome'
+import AddIncome     from '../AddIncome'
+import FusionCharts from 'fusioncharts';
+import Charts from 'fusioncharts/fusioncharts.charts';
+import ReactFC from 'react-fusioncharts';
+//import reactfusioncharts from 'react-fusioncharts';
 
+Charts(FusionCharts);
+
+let myDataSource = {
+    chart: {
+      caption: 'Harry\'s SuperMart',
+      subCaption: 'Top 5 stores in last month by revenue',
+      numberPrefix: '$',
+    },
+    data: [
+      {
+        label: 'Bakersfield Central',
+        value: '880000',
+      },
+      {
+        label: 'Garden Groove harbour',
+        value: '730000',
+      },
+      {
+        label: 'Los Angeles Topanga',
+        value: '59000',
+      },
+      {
+        label: 'Compton-Rancho Dom',
+        value: '520000',
+      },
+      {
+        label: 'Daly City Serramonte',
+        value: '330000',
+      },
+    ],
+  };
+  
+  const chartConfigs = {
+    type: 'pie3d',
+    width: "80%",
+    height: "400",
+    dataFormat: 'json',
+    dataSource: myDataSource,
+  };
+  
 class index extends Component {
+
+
     constructor(props) {
 		super(props);
 
@@ -85,6 +133,10 @@ class index extends Component {
 								handleCloseModal = { this.handleCloseModal }
 								option           = { this.state.option }
 							/>
+                            <div id='chart-container'>
+                            <ReactFC {...chartConfigs}// Provide FusionCharts library
+                            />
+                            </div>
 						</div>
 					</div>
 				</div>
