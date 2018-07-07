@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 
 import LoginAndRegister from './components/Login&Register';
-import Login from './components/Login&Register';
 import Desktop from './components/Desktop';
-import Sidedrawer from './components/Sidedrawer';
 
 class App extends Component {
     constructor(props){
@@ -16,13 +14,17 @@ class App extends Component {
 
 
 	render() {
-		return (
-			<div className='container container-Login'>
-				<LoginAndRegister />
+		let showSome = ''
+		if (this.state.user !== '')
+			showSome = <Desktop />
+		else
+			showSome = <div className='container container-Login'>	
+				<LoginAndRegister /> 
 			</div>
-			<div className='container'>
-				<Desktop />
-				
+				  
+		return (
+			<div>
+					{ showSome }
 			</div>
 		);
 	}
