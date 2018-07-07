@@ -2,8 +2,23 @@ import Api from './api';
 
 function UserApi(){}
 
+UserApi.loginUser = function(dataForm) {
+ 
+    return Promise.resolve (
+        Api
+            .post('/users/loginUser', dataForm)
 
-UserApi.getUser = function(id) {
+            .then( response => {
+                console.log('API RESPONSE: ', response);
+                if (response.ok)
+                    return response.json();
+                else
+                    return Promise.reject(response.json);
+            })
+    )
+}
+
+UserApi.getUser = function( id ) {
 
     return Promise.resolve (
         Api
@@ -23,7 +38,7 @@ UserApi.addUser = function(dataForm) {
 
     return Promise.resolve (
         Api
-            .post('/user/addUser', dataForm)
+            .post('/users/addUser', dataForm)
 
             .then( response => {
                 console.log('API RESPONSE: ', response);
@@ -39,7 +54,15 @@ UserApi.deleteUser = function( id ) {
 
     return Promise.resolve( 
         Api
-            .delete(`/user/deleteUser/${id}`)            
+            .delete(`/users/deleteUser/${id}`)
+
+            .then( response => {
+                console.log('API RESPONSE DELETE: ', response);
+                if (response.ok)
+                    return response.json();
+                else
+                    return Promise.reject(response.json);
+            })
         )
 }
 
