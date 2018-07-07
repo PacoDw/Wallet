@@ -4,7 +4,7 @@ const index = props => {
     return (
         <div id="sidedrawer" class="mui--no-user-select"> 
             <div id="sidedrawer-brand" className="mui--appbar-line-height">
-                <span className="mui--text-title">Brand.io</span>
+                <span className="mui--text-title">My Wallet</span>
             </div>
             <div className="mui-divider"></div>
             <ul>
