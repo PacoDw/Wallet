@@ -10,7 +10,8 @@ class index extends React.Component {
         super(props);
 
         this.state = { 
-            value : ''
+            value : '',
+            user : ''
         }
 
         this.handleGetValueInput = this.handleGetValueInput.bind(this);

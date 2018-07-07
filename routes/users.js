@@ -15,7 +15,7 @@ router
 					if (err) {
 						res.status(500).json({ err });
 					} else {
-						res.status(200).json({ ok: rows });
+						res.status(200).json({ user : rows[0] });
 					}
 				})
 			})

@@ -19,7 +19,6 @@ const Login = ( { handleGetValueInput } ) => {
             />
             <Button 
                 text = { 'Entrar' }
-
             />
         </form>
     );

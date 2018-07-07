@@ -11,7 +11,7 @@ class App extends Component {
         super(props);
 
         this.state = {
-			user : '' 
+			user : props.user
 		 }
     }
 
@@ -19,10 +19,14 @@ class App extends Component {
 		
 		Api.User
 			
-			.getUser(1)
+			.getUser(id)
 			
 			.then( response => {
-				console.log(response);
+				console.log('Response: ', response);
+
+				this.setState( {
+					user  : response
+				} );
 				
 				alert('paro');
 			})
