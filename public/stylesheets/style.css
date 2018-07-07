@@ -227,3 +227,10 @@
   display: flex;
   justify-content: center;
 }
+
+/* Chart */
+#chart-container {
+  display: flex;
+
+  justify-content: center;
+}

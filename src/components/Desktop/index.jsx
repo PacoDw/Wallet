@@ -1,8 +1,54 @@
 import React, { Component } from 'react';
 import Header     from '../Header'
 import SideDrawer from '../Sidedrawer'
+import FusionCharts from 'fusioncharts';
+import Charts from 'fusioncharts/fusioncharts.charts';
+import ReactFC from 'react-fusioncharts';
+//import reactfusioncharts from 'react-fusioncharts';
 
+Charts(FusionCharts);
+
+let myDataSource = {
+    chart: {
+      caption: 'Harry\'s SuperMart',
+      subCaption: 'Top 5 stores in last month by revenue',
+      numberPrefix: '$',
+    },
+    data: [
+      {
+        label: 'Bakersfield Central',
+        value: '880000',
+      },
+      {
+        label: 'Garden Groove harbour',
+        value: '730000',
+      },
+      {
+        label: 'Los Angeles Topanga',
+        value: '59000',
+      },
+      {
+        label: 'Compton-Rancho Dom',
+        value: '520000',
+      },
+      {
+        label: 'Daly City Serramonte',
+        value: '330000',
+      },
+    ],
+  };
+  
+  const chartConfigs = {
+    type: 'pie3d',
+    width: "80%",
+    height: "400",
+    dataFormat: 'json',
+    dataSource: myDataSource,
+  };
+  
 class index extends Component {
+
+
     constructor(props) {
 		super(props);
 
@@ -50,21 +96,11 @@ class index extends Component {
 						<div className='mui-panel'>
 							<br/>
 							<h1>My Wallet</h1>
-							<p>
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris
-								sollicitudin volutpat molestie. Nullam id tempor nulla. Aenean sit amet
-								urna et elit pharetra consequat. Aliquam fringilla tortor vitae lectus
-								tempor, tempor bibendum nunc elementum. Etiam ultrices tristique diam,
-								vitae sodales metus bibendum id. Suspendisse blandit ligula eu fringilla
-								pretium. Mauris dictum gravida tortor eu lacinia. Donec purus purus,
-								ornare sit amet consectetur sed, dictum sitamet ex. Vivamus sit amet
-								imperdiet tellus. Quisque ultrices risus a massa laoreet, vitae tempus sem
-								congue. Maecenas nec eros ut lectus vehicula rutrum. Donec consequat
-								tincidunt arcu non faucibus. Duis elementum, ante venenatis lacinia
-								cursus, turpis massa congue magna, sed dapibus felis nibh sed tellus. Nam
-								consectetur non nibh vitae sodales. Pellentesque malesuada dolor nec mi
-								volutpat, eget vehicula eros ultrices.
-							</p>
+                            <div id='chart-container'>
+                            <ReactFC {...chartConfigs}// Provide FusionCharts library
+                            />
+
+                            </div>
 						</div>
 					</div>
 				</div>

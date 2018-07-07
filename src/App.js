@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import LoginAndRegister from './components/Login&Register';
 import Desktop from './components/Desktop';
+import Chart from './components/Charts'
 
 class App extends Component {
     constructor(props){
@@ -24,7 +25,7 @@ class App extends Component {
 				  
 		return (
 			<div>
-					{ showSome }
+					{showSome}
 			</div>
 		);
 	}
