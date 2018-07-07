@@ -1,7 +1,9 @@
 import React from 'react';
 
 // Components-------------------------------
-import ReactModal from 'react-modal'
+import ReactModal from 'react-modal';
+import AddIncome  from './AddIncome';
+import AddOutcome from './AddOutcome'
 
 const customStyles = {
     content : {
@@ -18,19 +20,33 @@ const customStyles = {
 export default class Modal extends React.Component {
     render() {
         const { showModal, handleCloseModal, option } = this.props;
+
+        let typeModal = '';
+        let title     = '';
+
+        if ( option === 'Agregar gasto')
+        {
+            typeModal = <AddOutcome/>
+            title     = 'Agregar Gasto'
+        }
+        else
+        {
+            typeModal = <AddIncome/>
+            title     = 'Agregar Ingreso'
+        }
+
         return (
             <ReactModal 
                isOpen = { showModal }
                style  = {customStyles}
                overlayClassName = "Overlay"
-            >
-            
-              <p>Modal text!</p>
-              <p>{ option }</p>
-              
-              <form id='form-modal' action="">
-              </form>
-              <button onClick   = { handleCloseModal }>Close</button>
+               >
+               <div className='header-modal'>
+                    { title || 'Sin titulo' }
+                    <a id='close-modal' onClick = { handleCloseModal }>x</a>
+               </div>
+            <hr/>
+            { typeModal }
             </ReactModal>
         );
     }
