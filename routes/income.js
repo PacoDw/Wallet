@@ -12,11 +12,7 @@ router
 					if (err) {
 						res.status(500).json({ err });
 					} else {
-<<<<<<< HEAD
-						res.status(200).json({ rows });
-=======
 						res.status(200).json( rows );
->>>>>>> 1b1114ac5275917ce3972558c721cdc349fa2a4a
 					}
 				})
 			})
@@ -28,9 +24,9 @@ router
 				db.query('select amount, description from movements where id_movement_type = 2 && id_wallet = ?',id , (err, rows, fields) => {
 					console.log(rows);
 					if (err) {
-						res.status(500).json({ err });
+						res.status(500).json( err );
 					} else {
-						res.status(200).json({ rows });
+						res.status(200).json( rows );
 					}
 				})
 			})
@@ -49,7 +45,7 @@ router
 				const db = require('../database/config');
 				db.query('insert into movements (id_movement_type, amount, description, date, id_frequency, id_wallet) values (?,?,?,?,?,?)', movement, (err, rows, fields) => {
 					if (err) {
-						res.status(500).json({ err });
+						res.status(500).json( err );
 					} else {
 						res.status(200).json({ Movement: 'Added' });
 					}
@@ -62,9 +58,9 @@ router
 				let id = req.params.id;
 				db.query("Select * from movements where id_wallet = ? AND id_movement_type = (SELECT id_movement_type WHERE id_movement_type between 1 AND 2);",id , (err, rows, fields) => {
 					if (err) {
-						res.status(500).json({ err });
+						res.status(500).json( err );
 					} else {
-						res.status(200).json({ rows });
+						res.status(200).json( rows );
 					}
 				})
 			})
@@ -85,7 +81,7 @@ router
 					db.query('UPDATE movements set ? where ?', [movement, {id_movement: req.params.id}], (err, rows, fields) => {
 					if (err) {
 						console.log(err);
-						res.status(500).json({ err });
+						res.status(500).json( err );
 					} else {
 						res.status(200).json({ Movement: 'Updated' });
 					}

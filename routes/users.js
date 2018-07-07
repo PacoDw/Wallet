@@ -8,9 +8,9 @@ router
 				const db = require('../database/config');
 				db.query('select * from users where id_user =  ?', id, (err, rows, fields) => {
 					if (err) {
-						res.status(500).json({ err });
+						res.status(500).json( err );
 					} else {
-						res.status(200).json({ user : rows[0] });
+						res.status(200).json(rows[0]);
 					}
 				})
 			})
@@ -24,9 +24,9 @@ router
 				const db = require('../database/config');
 				db.query('select * from users where email = ? && `password` = ?', [email, password], (err, rows, fields) => {
 					if (err) {
-						res.status(500).json({ err });
+						res.status(500).json( err );
 					} else {
-						res.status(200).json({ user: rows[0] });
+						res.status(200).json( rows[0] );
 					}
 				})
 			})
@@ -43,7 +43,7 @@ router
 				const db = require('../database/config');
 				db.query('insert into users (email, `name`, `password`)values(?,?,?);', user, (err, rows, fields) => {
 					if (err) {
-						res.status(500).json({ err });
+						res.status(500).json( err );
 					} else {
 						res.status(200).json({ user: 'Added' });
 					}
@@ -57,7 +57,7 @@ router
 				const db = require('../database/config');
 				db.query('DELETE from users where id_user = ?', id, (err, rows, fields) => {
 					if (err) {
-						res.status(500).json({ err });
+						res.status(500).json( err );
 					} else {
 						res.status(200).json({ user: 'Deleted' });
 					}
