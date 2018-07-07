@@ -12,7 +12,7 @@ router
 					if (err) {
 						res.status(500).json({ err });
 					} else {
-						res.status(200).json({ Income: rows[0] });
+						res.status(200).json( rows );
 					}
 				})
 			})

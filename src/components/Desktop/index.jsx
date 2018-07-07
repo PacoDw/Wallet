@@ -2,140 +2,118 @@ import React, { Component } from 'react';
 import Header from '../Header'
 import SideDrawer from '../Sidedrawer'
 import Modal from '../Modal';
-import FusionCharts from 'fusioncharts';
-import Charts from 'fusioncharts/fusioncharts.charts';
-import ReactFC from 'react-fusioncharts';
+import Api from '../../utils';
+import MyCharts from '../Charts';
 
-Charts(FusionCharts);
-
-let myDataSource = {
-  chart: {
-    caption: 'Harry\'s SuperMart',
-    subCaption: 'Top 5 stores in last month by revenue',
-    numberPrefix: '$',
-  },
-  data: [
-    {
-      label: 'Bakersfield Central',
-      value: '880000',
-    },
-    {
-      label: 'Garden Groove harbour',
-      value: '730000',
-    },
-    {
-      label: 'Los Angeles Topanga',
-      value: '59000',
-    },
-    {
-      label: 'Compton-Rancho Dom',
-      value: '520000',
-    },
-    {
-      label: 'Daly City Serramonte',
-      value: '330000',
-    },
-  ],
-};
-
-const chartConfigs = {
-  type: 'pie3d',
-  width: "80%",
-  height: "400",
-  dataFormat: 'json',
-  dataSource: myDataSource,
-};
 
 class index extends Component {
 
+    constructor(props) {
+        super(props);
 
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      showModal: false,
-      option: '',
-      value: ''
+        this.state = {
+            showModal: false,
+            option: '',
+            value: '',
+            data2: []
+        }
+        this.handleShowSideDrawer = this.handleShowSideDrawer.bind(this);
+        this.handleHideSideDrawer = this.handleHideSideDrawer.bind(this);
+        this.handleTittle = this.handleTittle.bind(this);
+
+        this.handleShowModal = this.handleShowModal.bind(this);
+        this.handleCloseModal = this.handleCloseModal.bind(this);
+
+        this.handleGetValueInput = this.handleGetValueInput.bind(this);
     }
 
-    this.handleShowSideDrawer = this.handleShowSideDrawer.bind(this);
-    this.handleHideSideDrawer = this.handleHideSideDrawer.bind(this);
-    this.handleTittle = this.handleTittle.bind(this);
-
-    this.handleShowModal = this.handleShowModal.bind(this);
-    this.handleCloseModal = this.handleCloseModal.bind(this);
-
-    this.handleGetValueInput = this.handleGetValueInput.bind(this);
-  }
-
-  handleGetValueInput(e) {
-    e.preventDefault();
-    this.setState({ value: e.target.value });
-  }
-
-  handleShowModal(e) {
-    e.preventDefault();
-    this.setState({ showModal: true, option: e.target.text });
-
-  }
-  handleCloseModal(e) {
-    e.preventDefault();
-    this.setState({ showModal: false });
-  }
+    componentWillMount() {
+        Api.Income.getIncomeFixed(6)
+            .then(data => {
+                this.setState({ data2: data || [] })
+                console.log(this.state.data2);
+            }
+            ).catch(err => { console.log(err) });
+    }
 
 
-  handleShowSideDrawer(e) {
-    e.preventDefault();
-    let sidedrawer = document.querySelector('#sidedrawer')
-    console.log("entro");
-    setTimeout(function () {
-      sidedrawer.classList.add('active');
-    }, 20);
-  }
 
-  handleHideSideDrawer(e) {
-    e.preventDefault();
-    console.log("entro");
-    document.querySelector('body').classList.toggle('hide-sidedrawer');
-  }
+    handleGetValueInput(e) {
+        e.preventDefault();
+        this.setState({ value: e.target.value });
+    }
 
-  handleTittle(e) {
-    let ul = e.target.nextSibling;
+    handleShowModal(e) {
+        e.preventDefault();
+        this.setState({ showModal: true, option: e.target.text });
 
-    ul.classList.toggle('hiden-items');
-  }
+    }
+    handleCloseModal(e) {
+        e.preventDefault();
+        this.setState({ showModal: false });
+    }
 
-  render() {
-    console.log('Modal : ', this.state.showModal);
 
-    return (
-      <div>
-        <SideDrawer
-          handleTittle={this.handleTittle}
-          handleShowModal={this.handleShowModal}
-        />
+    handleShowSideDrawer(e) {
+        e.preventDefault();
+        let sidedrawer = document.querySelector('#sidedrawer')
+        console.log("entro");
+        setTimeout(function () {
+            sidedrawer.classList.add('active');
+        }, 20);
+    }
 
-        <Header
-          showSidedrawer={this.handleShowSideDrawer}
-          hideSidedrawer={this.handleHideSideDrawer}
-        />
-        <div id="content-wrapper">
-          <div class="mui--appbar-height"></div>
-          <div class="mui-container-fluid">
-            <div className='mui-panel'>
-              <Modal
-                showModal={this.state.showModal}
-                handleCloseModal={this.handleCloseModal}
-                option={this.state.option}
-              />
-              <ReactFC {...chartConfigs}// Provide FusionCharts library
-              />
+    handleHideSideDrawer(e) {
+        e.preventDefault();
+        console.log("entro");
+        document.querySelector('body').classList.toggle('hide-sidedrawer');
+    }
+
+    handleTittle(e) {
+        let ul = e.target.nextSibling;
+
+        ul.classList.toggle('hiden-items');
+    }
+
+
+
+    render() {
+        //console.log('Modal : ', this.state.showModal);
+        //console.log('State: ' + this.state.data2);
+        let info = this.state.data2;
+        const chartData = info.map(item => ({ label: item.description, value: item.amount }));
+        //console.log(chartData);
+        return (
+            <div>
+                <SideDrawer
+                    handleTittle={this.handleTittle}
+                    handleShowModal={this.handleShowModal}
+                />
+
+                <Header
+                    showSidedrawer={this.handleShowSideDrawer}
+                    hideSidedrawer={this.handleHideSideDrawer}
+                />
+                <div id="content-wrapper">
+                    <div class="mui--appbar-height"></div>
+                    <div class="mui-container-fluid">
+                        <div className='mui-panel'>
+                            <Modal
+                                showModal={this.state.showModal}
+                                handleCloseModal={this.handleCloseModal}
+                                option={this.state.option}
+                            />
+                            <MyCharts 
+                            Data={chartData}
+                            Name={'Ingreso Fijo'}
+                            />  
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
+        );
+    }
 }
 
 export default index;
