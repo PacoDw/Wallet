@@ -9,8 +9,8 @@ const Login = ( { handleGetValueInput, loginUser } ) => {
     return (
         <form id='LoginForm' action="">
             <Input
-                placeholder = 'Nombre' 
-                name        = 'nombre'                     
+                placeholder = 'Email' 
+                name        = 'email'                     
             />            
             <Input
                 type        = 'password' 

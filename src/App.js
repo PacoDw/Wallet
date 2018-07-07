@@ -12,7 +12,9 @@ class App extends Component {
         super(props);
 
         this.state = {
-			user : props.user
+			user        : '',
+			showDesktop : false
+
 		 }
     }
 
@@ -23,21 +25,19 @@ class App extends Component {
 
 		onGetForm(formulario, ( dataForm ) => {
 				
-			Api.Seller
-				.addSeller( dataForm )
+			Api.User
+				.loginUser( dataForm )
 
 				.then( data => {
-					document.querySelector('#closeSellerForm').click();
-
-					let id_office_manager = this.state.id_office_manager;
-
+					this.setState( { user : data.user,  showDesktop : true } )
 				})
 		})
 	}
 
 	render() {
-		let showSome = ''
-		if (this.state.user === '')
+		let showSome = '';
+
+		if (this.state.showDesktop)
 			showSome = <Desktop />
 		else
 			showSome = <div className='container container-Login'>	
@@ -48,7 +48,7 @@ class App extends Component {
 				  
 		return (
 			<div>
-					{showSome}
+					{ showSome }
 			</div>
 		);
 	}
