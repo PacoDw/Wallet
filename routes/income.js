@@ -3,12 +3,7 @@ var router = express.Router();
 
 router
 
-			.get('/', function (req, res, next) {
-				res.status(200).json({ Income: 'Income' });
-			})
-
-
-			.get('/getIncomeFixed/:id', function (req, res, next) {
+			.get('/getIncomeFixed/:id', (req, res, next) => {
 				let id = req.params.id;
 				
 				const db = require('../database/config');	
@@ -17,43 +12,43 @@ router
 					if (err) {
 						res.status(500).json({ err });
 					} else {
-						res.status(200).json({ ok: rows });
+						res.status(200).json({ Income: rows[0] });
 					}
 				})
 			})
 
 
-			.get('/getIncomeIncidental/:id', function (req, res, next) {
+			.get('/getIncomeIncidental/:id', (req, res, next) => {
 				const db = require('../database/config');	
 				let id = req.params.id;
-				db.query('select amount, description from movements where movement_type = "Ingreso Improvisto" && id_wallet = ?',id , (err, rows, fields) => {
+				db.query('select amount, description from movements where movement_type = "Ingreso Imprevisto" && id_wallet = ?',id , (err, rows, fields) => {
 					console.log(rows);
 					if (err) {
 						res.status(500).json({ err });
 					} else {
-						res.status(200).json({ ok: rows });
+						res.status(200).json({ Income: rows[0] });
 					}
 				})
 			})
 
 
-			.post('/addIncome/:id', function (req, res, next) {
-				movement = {
-					id_movement : 0,
-					movement_type : req.body.movement_type,
-					amount : req.body.amount,
-					description : req.body.description,
-					date : req.body.date,
-					id_frecuency : req.body.id_frecuency,
-					id_wallet : req.params.id
-				}
+			.post('/addIncome/:id', (req, res, next) => {
+				let movement = [
+					req.body.movement_type,
+					req.body.amount,
+					req.body.description,
+					req.body.date,
+					req.body.id_frecuency,
+					req.params.id
+				]	
 				
 				const db = require('../database/config');
-				db.query('insert into movements ?', movement, (err, rows, fields) => {
+				db.query('insert into movements (movement_type, amount, description, date, id_frequency, id_wallet) values (?,?,?,?,?,?)', movement, (err, rows, fields) => {
 					if (err) {
+						console.log(err);
 						res.status(500).json({ err });
 					} else {
-						res.status(200).json({ ok: 'Added' });
+						res.status(200).json({ Movement: 'Added' });
 					}
 				})
 			})

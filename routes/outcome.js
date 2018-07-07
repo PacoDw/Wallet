@@ -3,11 +3,6 @@ var router = express.Router();
 
 router
 
-			.get('/', function (req, res, next) {
-				res.status(200).json({ outcome: 'outcome' });
-			})
-
-
 			.get('/getOutcomeFixed/:id', function (req, res, next) {
 				const db = require('../database/config');	
 				let id = req.params.id;
@@ -16,7 +11,7 @@ router
 					if (err) {
 						res.status(500).json({ err });
 					} else {
-						res.status(200).json({ ok: rows });
+						res.status(200).json({ ok: rows[0] });
 					}
 				})
 			})
@@ -25,34 +20,34 @@ router
 			.get('/getOutcomeIncidental/:id', function (req, res, next) {
 				const db = require('../database/config');	
 				let id = req.params.id;
-				db.query('select amount, description from movements where movement_type = "Gasto Improvisto" && id_wallet = ?',id , (err, rows, fields) => {
+				db.query('select amount, description from movements where movement_type = "Gasto Imprevisto" && id_wallet = ?',id , (err, rows, fields) => {
 					console.log(rows);
 					if (err) {
 						res.status(500).json({ err });
 					} else {
-						res.status(200).json({ ok: rows });
+						res.status(200).json({ ok: rows[0] });
 					}
 				})
 			})
 
 
 			.post('/addOutcome/:id', function (req, res, next) {
-				movement = {
-					id_movement : 0,
-					movement_type : req.body.movement_type,
-					amount : req.body.amount,
-					description : req.body.description,
-					date : req.body.date,
-					id_frecuency : req.body.id_frecuency,
-					id_wallet : req.params.id
-				}
-
+				let movement = [
+					req.body.movement_type,
+					req.body.amount,
+					req.body.description,
+					req.body.date,
+					req.body.id_frecuency,
+					req.params.id
+				]	
+				
 				const db = require('../database/config');
-				db.query('insert into movements ?', movement, (err, rows, fields) => {
+				db.query('insert into movements (movement_type, amount, description, date, id_frequency, id_wallet) values (?,?,?,?,?,?)', movement, (err, rows, fields) => {
 					if (err) {
+						console.log(err);
 						res.status(500).json({ err });
 					} else {
-						res.status(200).json({ ok: 'Added' });
+						res.status(200).json({ Movement: 'Added' });
 					}
 				})
 			})
