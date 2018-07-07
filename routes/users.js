@@ -11,7 +11,7 @@ router
 			.get('/user/:id', (req, res, next) => {
 				let id = req.params.id;
 				const db = require('../database/config');
-				db.query('select from users where id_user =  ?', id, (err, rows, fields) => {
+				db.query('select * from users where id_user =  ?', id, (err, rows, fields) => {
 					if (err) {
 						res.status(500).json({ err });
 					} else {
