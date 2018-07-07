@@ -34,11 +34,11 @@ OutcomeApi.getOutcomeIncidental = function( id ) {
     )
 }
 
-OutcomeApi.addOutcome = function(dataForm) {
+OutcomeApi.addOutcome = function( dataForm, id  ) {
 
     return Promise.resolve (
         Api
-            .post('/outcome/addOutcome', dataForm)
+            .post(`/outcome/addOutcome/${id}`, dataForm)
 
             .then( response => {
                 console.log('API RESPONSE: ', response);

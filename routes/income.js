@@ -12,7 +12,11 @@ router
 					if (err) {
 						res.status(500).json({ err });
 					} else {
+<<<<<<< HEAD
 						res.status(200).json({ rows });
+=======
+						res.status(200).json( rows );
+>>>>>>> 1b1114ac5275917ce3972558c721cdc349fa2a4a
 					}
 				})
 			})
