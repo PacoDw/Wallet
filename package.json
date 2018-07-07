@@ -19,11 +19,7 @@
     "http-errors": "~1.6.2",
     "jade": "~1.11.0",
     "morgan": "~1.9.0",
-<<<<<<< HEAD
-    "nodemon": "^1.17.5",
-=======
     "muicss": "^0.9.39",
->>>>>>> ddad691b5b9008a6362bf88643ca8abd8980871a
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-fusioncharts": "^1.0.5",
