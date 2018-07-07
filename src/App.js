@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 
 import LoginAndRegister from './components/Login&Register';
 import Desktop from './components/Desktop';
-import Chart from './components/Charts'
+
+import Api from './utils';
+
 
 class App extends Component {
     constructor(props){
@@ -13,6 +15,20 @@ class App extends Component {
 		 }
     }
 
+	componentDidMount(){
+		
+		Api.User
+			
+			.getUser(1)
+			
+			.then( response => {
+				console.log(response);
+				
+				alert('paro');
+			})
+
+			.catch( error => alert('Error: ', error));
+	}
 
 	render() {
 		let showSome = ''

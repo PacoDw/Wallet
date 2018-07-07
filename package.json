@@ -13,6 +13,7 @@
     "bootstrap": "^4.1.1",
     "chart.js": "^2.7.2",
     "cookie-parser": "~1.4.3",
+    "cors": "^2.8.4",
     "debug": "~2.6.9",
     "express": "~4.16.0",
     "fusioncharts": "^3.12.2",
@@ -23,8 +24,8 @@
     "mysql": "^2.15.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "react-modal": "^3.5.1",
     "react-fusioncharts": "^1.0.5",
+    "react-modal": "^3.5.1",
     "react-scripts": "1.1.4"
   }
 }

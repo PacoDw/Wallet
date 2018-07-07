@@ -3,11 +3,11 @@ import Api from './api';
 function UserApi(){}
 
 
-UserApi.getUser = function() {
+UserApi.getUser = function(id) {
 
     return Promise.resolve (
         Api
-            .get('/user/getUser')
+            .get(`/users/user/${id}`)
 
             .then( response => {
                 console.log('API RESPONSE GET USER: ', response);
