@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Header     from '../Header'
 import SideDrawer from '../Sidedrawer'
+import AddOutcome     from '../AddOutcome'
+import AddIncome     from '../AddIncome'
 import FusionCharts from 'fusioncharts';
 import Charts from 'fusioncharts/fusioncharts.charts';
 import ReactFC from 'react-fusioncharts';
@@ -99,7 +101,6 @@ class index extends Component {
                             <div id='chart-container'>
                             <ReactFC {...chartConfigs}// Provide FusionCharts library
                             />
-
                             </div>
 						</div>
 					</div>
