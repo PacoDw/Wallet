@@ -2,12 +2,9 @@ import React, { Component } from 'react';
 import Header     from '../Header'
 import SideDrawer from '../Sidedrawer'
 import Modal      from '../Modal';
-import AddOutcome     from '../AddOutcome'
-import AddIncome     from '../AddIncome'
 import FusionCharts from 'fusioncharts';
 import Charts from 'fusioncharts/fusioncharts.charts';
 import ReactFC from 'react-fusioncharts';
-//import reactfusioncharts from 'react-fusioncharts';
 
 Charts(FusionCharts);
 
@@ -61,9 +58,9 @@ class index extends Component {
 			value     : ''
 		}
 
-		this.handleShowSideDrawer  = this.handleShowSideDrawer.bind(this);
-        this.handleHideSideDrawer  = this.handleHideSideDrawer.bind(this);
-        this.handleTittle          = this.handleTittle.bind(this);
+    this.handleShowSideDrawer  = this.handleShowSideDrawer.bind(this);
+    this.handleHideSideDrawer  = this.handleHideSideDrawer.bind(this);
+    this.handleTittle          = this.handleTittle.bind(this);
 		
 		this.handleShowModal = this.handleShowModal.bind(this);
 		this.handleCloseModal = this.handleCloseModal.bind(this);

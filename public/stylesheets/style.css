@@ -243,3 +243,14 @@
 
   justify-content: center;
 }
+
+/* Header Modal */
+.header-modal{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#close-modal{
+  cursor: pointer;
+}

@@ -11,25 +11,25 @@ const index = ( { handleTittle, handleShowModal } ) => {
                 <li>
                     <strong onClick = { handleTittle }>Gastos</strong>
                     <ul>
-                        <li><a onClick = { handleShowModal } href="#">Gastos Fijos</a></li>
-                        <li><a onClick = { handleShowModal } href="#">Gastos Imprevisto</a></li>
+                        <li><a href="#">Gastos Fijos</a></li>
+                        <li><a href="#">Gastos Imprevisto</a></li>
                         <li><a onClick = { handleShowModal } href="#">Agregar gasto</a></li>
                     </ul>
                 </li>
                 <li>
                     <strong onClick = { handleTittle }>Ingresos</strong>
                     <ul>
-                        <li><a onClick = { handleShowModal } href="#">Ingresos Fijos</a></li>
-                        <li><a onClick = { handleShowModal } href="#">Ingresos Extras</a></li>
+                        <li><a href="#">Ingresos Fijos</a></li>
+                        <li><a href="#">Ingresos Extras</a></li>
                         <li><a onClick = { handleShowModal } href="#">Agregar Ingreso</a></li>
                     </ul>
                 </li>
                 <li>
                 <strong onClick = { handleTittle }>Configuración</strong>
                     <ul>
-                        <li><a onClick = { handleShowModal } href="#">Item 1</a></li>
-                        <li><a onClick = { handleShowModal } href="#">Item 2</a></li>
-                        <li><a onClick = { handleShowModal } href="#">Item 3</a></li>
+                        <li><a href="#">Item 1</a></li>
+                        <li><a href="#">Item 2</a></li>
+                        <li><a href="#">Item 3</a></li>
                         <li><a href="#">Mi Perfil</a></li>
                         <li><a href="#">Item 2</a></li>
                         <li><a href="#">Cerrar sesión</a></li>
