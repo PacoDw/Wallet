@@ -35,7 +35,7 @@ router
 			.post('/addUser', (req, res, next) => {
 				let user = [
 					req.body.email,
-					req.body.username,
+					req.body.name,
 					req.body.password
 				]
 	
@@ -45,7 +45,7 @@ router
 					if (err) {
 						res.status(500).json( err );
 					} else {
-						res.status(200).json({ user: 'Added' });
+						res.status(200).json( user );
 					}
 				})
 			})

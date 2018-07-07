@@ -5,12 +5,12 @@ import Input from '../Input';
 import Button from '../Buttom';
 
 
-const Register = ( { handleGetValueInput } ) => {
+const Register = ( { registerUser } ) => {
     return (
         <form id='RegisterForm' action="">
             <Input
                 placeholder = 'Nombre' 
-                name        = 'nombre'
+                name        = 'name'
             />
             <Input
                 placeholder = 'Email' 
@@ -23,7 +23,8 @@ const Register = ( { handleGetValueInput } ) => {
             />
             <Button 
                 text  = 'Registrar'   
-                color = 'accent'          
+                color = 'accent'
+                someClick = { registerUser }          
             />
         </form>
     );

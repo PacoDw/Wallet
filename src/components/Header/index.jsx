@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const Header = ({ showSidedrawer, hideSidedrawer }) => {
+const Header = ({ showSidedrawer, hideSidedrawer, closeSesion }) => {
     return (
         <header id="header">
             <div className="mui-appbar mui--appbar-line-height">
@@ -13,7 +13,7 @@ const Header = ({ showSidedrawer, hideSidedrawer }) => {
             </div>
             <nav id='nav-header'>
                 <h3 id='nav-title'>My Wallet</h3>
-                <a id='nav-sesion'>Cerrar Sesión</a>
+                <a onClick = { closeSesion } id='nav-sesion'>Cerrar Sesión</a>
             </nav>
         </header>
     );

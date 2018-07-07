@@ -24,6 +24,10 @@ class Modal extends React.Component {
     constructor(props){
         super(props);
 
+        this.state = { 
+            user : props.user
+        }
+
         this.handleAddIncome  = this.handleAddIncome.bind(this);
         this.handleAddOutcome = this.handleAddOutcome.bind(this); 
     }
@@ -33,17 +37,15 @@ class Modal extends React.Component {
 
         let formulario = document.querySelector('#AddOutcome');
 
-        console.log('Target: ', formulario);
-
 		onGetForm(formulario, ( dataForm ) => {
                 console.log('dataForm: ', dataForm);
                 alert('Paro');
                 
 			Api.Outcome
-				.addOutcome( dataForm, 1 )
+				.addOutcome( dataForm, this.state.user.id )
 
 				.then( data => {
-                    console.log(data)
+                    console.log('AddOutcome: ', data)                    
 					// this.setState( { user : data.user} )
                 })
                 
@@ -60,10 +62,10 @@ class Modal extends React.Component {
         onGetForm(formulario, ( dataForm ) => {
                 
             Api.Income
-                .addIncome( dataForm )
+                .addIncome( dataForm, this.state.user.id )
 
                 .then( data => {
-                    console.log(data)
+                    console.log('AddIncome: ', data)
                     // this.setState( { user : data.user} )
                 })
                 
@@ -100,7 +102,12 @@ class Modal extends React.Component {
                >
                <div className='header-modal'>
                     { title || 'Sin titulo' }
-                    <a id='close-modal' onClick = { handleCloseModal }>x</a>
+                    <a 
+                        id='close-modal'
+                         onClick = { handleCloseModal }
+                    >x
+                    </a>
+
                </div>
             <hr/>
             { typeModal }
