@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "nodemon ./bin/www",
     "start-react": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
@@ -22,6 +22,7 @@
     "morgan": "~1.9.0",
     "muicss": "^0.9.39",
     "mysql": "^2.15.0",
+    "nodemon": "^1.17.5",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-fusioncharts": "^1.0.5",
