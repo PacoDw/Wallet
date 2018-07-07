@@ -5,20 +5,21 @@ import Input  from '../Input';
 import Button from '../Buttom';
 
 
-const Login = ( { handleGetValueInput } ) => {
+const Login = ( { handleGetValueInput, loginUser } ) => {
     return (
         <form id='LoginForm' action="">
             <Input
-                placeholder = { 'Nombre' }
-                handleGetValueInput = { handleGetValueInput }                 
+                placeholder = 'Nombre' 
+                name        = 'nombre'                     
             />            
             <Input
-                type        = { 'password' }
-                placeholder = { 'Password' }
-                handleGetValueInput = { handleGetValueInput }
+                type        = 'password' 
+                placeholder = 'Password' 
+                name        = 'password'                     
             />
             <Button 
-                text = { 'Entrar' }
+                text      = { 'Entrar' }
+                someClick = { loginUser }
             />
         </form>
     );

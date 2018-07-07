@@ -10,16 +10,8 @@ class index extends React.Component {
         super(props);
 
         this.state = { 
-            value : '',
             user : ''
         }
-
-        this.handleGetValueInput = this.handleGetValueInput.bind(this);
-    }
-
-    handleGetValueInput(e) {
-        e.preventDefault();
-        this.setState( { value : e.target.value } );
     }
 
     render() {
@@ -32,13 +24,12 @@ class index extends React.Component {
                     <div className="mui-tabs__pane mui--is-active panel-login" id="pane-default-1">
                         <Login 
                             handleGetValueInput = { this.handleGetValueInput }
-                            value = { this.state.value }
+                            loginUser = { this.props.loginUser }
                         />
                     </div>
                     <div className="mui-tabs__pane panel-register" id="pane-default-2">
                         <Register 
                             handleGetValueInput = { this.handleGetValueInput }
-                            value = { this.state.value }
                         />
                     </div>
             </div>

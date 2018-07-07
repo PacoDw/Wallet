@@ -9,21 +9,21 @@ const Register = ( { handleGetValueInput } ) => {
     return (
         <form id='RegisterForm' action="">
             <Input
-                placeholder = { 'Nombre' }
-                handleGetValueInput = { handleGetValueInput }                 
+                placeholder = 'Nombre' 
+                name        = 'nombre'
             />
             <Input
-                placeholder = { 'Email' }
-                handleGetValueInput = { handleGetValueInput }                 
+                placeholder = 'Email' 
+                name        = 'email'
             />          
             <Input
-                type        = { 'password' }
-                placeholder = { 'Password' }
-                handleGetValueInput = { handleGetValueInput }
+                type        = 'password' 
+                placeholder = 'Password' 
+                name        = 'password'
             />
             <Button 
-                text  = { 'Registrar'}   
-                color = { 'accent' }         
+                text  = 'Registrar'   
+                color = 'accent'          
             />
         </form>
     );

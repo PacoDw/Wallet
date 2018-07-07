@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import LoginAndRegister from './components/Login&Register';
 import Desktop from './components/Desktop';
 
-import Api from './utils';
+import Api 	     from './utils';
+import onGetForm from './utils/onGetForm';
 
 
 class App extends Component {
@@ -15,23 +16,24 @@ class App extends Component {
 		 }
     }
 
-	componentDidMount(){
-		
-		Api.User
-			
-			.getUser(id)
-			
-			.then( response => {
-				console.log('Response: ', response);
+	handleLoginUser(e) {
+		e.preventDefault();
 
-				this.setState( {
-					user  : response
-				} );
+		let formulario = document.querySelector('#LoginForm');
+
+		onGetForm(formulario, ( dataForm ) => {
 				
-				alert('paro');
-			})
+			Api.Seller
+				.addSeller( dataForm )
 
-			.catch( error => alert('Error: ', error));
+				.then( data => {
+					document.querySelector('#closeSellerForm').click();
+
+					let id_office_manager = this.state.id_office_manager;
+
+				})
+
+		})
 	}
 
 	render() {
@@ -40,7 +42,9 @@ class App extends Component {
 			showSome = <Desktop />
 		else
 			showSome = <div className='container container-Login'>	
-				<LoginAndRegister /> 
+				<LoginAndRegister 
+					loginUser = { this.handleLoginUser }
+				/> 
 			</div>
 				  
 		return (
