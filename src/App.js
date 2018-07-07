@@ -32,7 +32,6 @@ class App extends Component {
 					let id_office_manager = this.state.id_office_manager;
 
 				})
-
 		})
 	}
 
