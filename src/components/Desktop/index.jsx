@@ -109,6 +109,7 @@ class index extends Component {
                             Name={'Ingreso Fijo'}
                             />  
                         </div>
+                        
                     </div>
                 </div>
             </div>
