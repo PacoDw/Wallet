@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Login from './components/Login&Register';
+import LoginAndRegister from './components/Login&Register';
 
 class App extends Component {
     constructor(props){
@@ -14,8 +14,8 @@ class App extends Component {
 
 	render() {
 		return (
-			<div className='container'>
-				<Login />
+			<div className='container container-Login'>
+				<LoginAndRegister />
 			</div>
 		);
 	}
