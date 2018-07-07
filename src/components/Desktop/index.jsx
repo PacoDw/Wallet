@@ -123,16 +123,13 @@ class index extends Component {
 					<div class="mui--appbar-height"></div>
 						<div class="mui-container-fluid">
 						<div className='mui-panel'>
-							<h1>My Wallet</h1>
 							<Modal 
 								showModal        = { this.state.showModal  }
 								handleCloseModal = { this.handleCloseModal }
 								option           = { this.state.option }
 							/>
-                            <div id='chart-container'>
                             <ReactFC {...chartConfigs}// Provide FusionCharts library
                             />
-                            </div>
 						</div>
 					</div>
 				</div>
