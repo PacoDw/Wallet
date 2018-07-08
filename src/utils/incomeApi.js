@@ -4,6 +4,8 @@ function IncomeApi(){}
 
 IncomeApi.getIncomeFixed = function( id ) {
 
+    console.log('ID INCOME API: ', id);
+    
     return Promise.resolve (
         Api
             .get(`/income/getIncomeFixed/${id}`)

@@ -30,7 +30,7 @@ class index extends Component {
 
         this.handleShowSideDrawer = this.handleShowSideDrawer.bind(this);
         this.handleHideSideDrawer = this.handleHideSideDrawer.bind(this);
-        this.handleTittle         = this.handleTittle.bind(this);
+        this.handleTittle        = this.handleTittle.bind(this);
 
         this.handleShowModal      = this.handleShowModal.bind(this);
         this.handleCloseModal     = this.handleCloseModal.bind(this);
@@ -47,11 +47,12 @@ class index extends Component {
         this.handleGetPanel       = this.handleGetPanel.bind(this);
 
 
+        console.log('constructor: ', props);
     }
     
     
     
-	handleGetPanel(e) {
+	handleGetPanel = (e) => {
         e.preventDefault();
         
         let whichPanel = '';
@@ -85,7 +86,10 @@ class index extends Component {
     
     handleGetIncomeFixed() {
         alert("entro al income fixed");
-        Api.Income.getIncomeFixed(this.state.user.id)//this.state.user.id
+
+        Api.Income.
+        
+        getIncomeFixed(this.state.user.id_user)//this.state.user.id
         
         .then(data => {
             this.setState({ data2: data || [] })
@@ -99,7 +103,8 @@ class index extends Component {
 
     handleGetIncomeIncidental(){
         alert("entro al income Incidental");
-        Api.Income.getIncomeIncidental(this.state.user.id) //this.state.user.id
+        Api.Income.getIncomeIncidental(this.state.user.id_user) //this.state.user.id
+        
         .then(data => {
             this.setState({ data2: data || [] })
             // console.log('nexProps: ', nextProps.user)
@@ -152,10 +157,12 @@ class index extends Component {
 
     render() {
         //console.log('Modal : ', this.state.showModal);
-        console.log('State: ' + this.state.data2);
-        let info = this.state.data2;
-        const chartData = info.map(item => ({ label: item.description, value: item.amount }));
-        console.log(this.state.showPanel);
+
+            //console.log('State: ' + this.state.data2);
+            let info = this.state.data2;
+            const chartData = info.map(item => ({ label: item.description, value: item.amount }));
+            console.log(this.state.showPanel);
+
         return (
             <div>
                 <SideDrawer

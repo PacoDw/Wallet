@@ -13,7 +13,7 @@ class App extends Component {
 
         this.state = {
 			user        : '',
-			showDesktop : true
+			showDesktop : false
 		 }
 
 		 this.handleLoginUser    = this.handleLoginUser.bind(this);
@@ -29,7 +29,6 @@ class App extends Component {
 				
 			Api.User
 				.addUser( dataForm )
-
 				.then( data => {
 					this.setState( { user : data.user,  showDesktop : true } )
 				})
@@ -45,11 +44,10 @@ class App extends Component {
 				
 			Api.User
 				.loginUser( dataForm )
-
 				.then( data => {
-					this.setState( { user : data.user,  showDesktop : true } )
+					console.log('Setiando: ', data);
+					this.setState( { user : data,  showDesktop : true } )
 				})
-
 				.catch(err => console.log('ERROR: ', err));
 		})
 	}
