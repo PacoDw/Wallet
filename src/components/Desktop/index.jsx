@@ -23,7 +23,8 @@ class index extends Component {
             value       : '',
             data2       : [],
             showDesktop : props.showDesktop,
-            showPanel   : ''
+            showPanel   : '',
+            PanelName   : ''
         }
 
 
@@ -39,44 +40,66 @@ class index extends Component {
 
         this.handleGetIncomeFixed = this.handleGetIncomeFixed.bind(this);
 
+        this.handleGetIncomeIncidental = this.handleGetIncomeIncidental.bind(this);
+
         this.handlecloseSesion    = this.handlecloseSesion.bind(this);
 
         this.handleGetPanel       = this.handleGetPanel.bind(this);
 
 
-        this.handleGetIncomeFixed();
     }
-
-
-
+    
+    
+    
 	handleGetPanel(e) {
         e.preventDefault();
         
         let whichPanel = '';
-
+        let name='';
         switch(e.target.name)
         {
             case 'gastos-fijos':
-                whichPanel = <GastosFijos
-                              />
+            whichPanel = <GastosFijos/>
             break;
+
             case 'gastos-imprevistos':
-                whichPanel = <GastosImprovistos/>
+            whichPanel = <GastosImprovistos/>
             break;
+
             case 'ingresos-fijos':
-                whichPanel = <IngresosFijos/>
+            name='Ingresos Fijos';
+            this.handleGetIncomeFixed();
+            whichPanel = <IngresosFijos
+            />
             break;
+
             case 'ingresos-extras':
-                whichPanel = <IngresosExtras/>
-            break
+            name='Ingresos Extras';
+            this.handleGetIncomeIncidental();
+            whichPanel = <IngresosExtras/>
+            break;
         }
-
-		this.setState( { showPanel : whichPanel } )
+        
+		this.setState( { showPanel : whichPanel , PanelName : name} )
 	}
-
+    
     handleGetIncomeFixed() {
-        Api.Income.getIncomeFixed(this.state.user.id)
-            
+        alert("entro al income fixed");
+        Api.Income.getIncomeFixed(this.state.user.id)//this.state.user.id
+        
+        .then(data => {
+            this.setState({ data2: data || [] })
+            console.log(data);
+            // console.log('nexProps: ', nextProps.user)
+        })
+        
+        .catch(err =>  console.log(err) );
+    }
+    
+
+    handleGetIncomeIncidental(){
+        alert("entro al income Incidental");
+        Api.Income.getIncomeIncidental(this.state.user.id) //this.state.user.id
         .then(data => {
             this.setState({ data2: data || [] })
             // console.log('nexProps: ', nextProps.user)
@@ -84,7 +107,6 @@ class index extends Component {
         
         .catch(err =>  console.log(err) );
     }
-
 
     handleGetValueInput(e) {
         e.preventDefault();
@@ -130,10 +152,10 @@ class index extends Component {
 
     render() {
         //console.log('Modal : ', this.state.showModal);
-        //console.log('State: ' + this.state.data2);
+        console.log('State: ' + this.state.data2);
         let info = this.state.data2;
         const chartData = info.map(item => ({ label: item.description, value: item.amount }));
-        //console.log(chartData);
+        console.log(this.state.showPanel);
         return (
             <div>
                 <SideDrawer
@@ -153,6 +175,9 @@ class index extends Component {
                     <div class="mui--appbar-height"></div>
                     <div class="mui-container-fluid">
                         <div className='mui-panel'>
+                            { this.state.showPanel }
+                        </div>                        
+                        <div className='mui-panel'>
                             
                             <Modal
                                 user             = { this.state.user       }
@@ -163,13 +188,10 @@ class index extends Component {
 
                             <MyCharts 
                                 Data = {   chartData   }
-                                Name = { 'Ingreso Fijo'}
+                                Name = { this.state.PanelName}
                             />
 
                         </div>
-                        <div className='mui-panel'>
-                            { this.state.showPanel }
-                        </div>                        
                     </div>
                 </div>
             </div>
