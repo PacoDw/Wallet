@@ -1,6 +1,6 @@
 import React from 'react';
 
-const index = ( { handleTittle, handleShowModal } ) => {
+const index = ( { handleTittle, handleShowModal, handleGetPanel } ) => {
     return (
         <div id="sidedrawer" class="mui--no-user-select"> 
             <div id="sidedrawer-brand" className="mui--appbar-line-height">
@@ -9,18 +9,18 @@ const index = ( { handleTittle, handleShowModal } ) => {
             <div className="mui-divider"></div>
             <ul>
                 <li>
-                    <strong onClick = { handleTittle }>Gastos</strong>
+                    <strong    onClick = { handleTittle }>Gastos</strong>
                     <ul>
-                        <li><a href="#">Gastos Fijos</a></li>
-                        <li><a href="#">Gastos Imprevisto</a></li>
-                        <li><a onClick = { handleShowModal } href="#">Agregar gasto</a></li>
+                        <li><a name='gastos-fijos'       onClick = { handleGetPanel } href="#">Gastos Fijos</a></li>
+                        <li><a name='gastos-imprevistos' onClick = { handleGetPanel } href="#">Gastos Imprevisto</a></li>
+                        <li><a  onClick = { handleShowModal } href="#">Agregar gasto</a></li>
                     </ul>
                 </li>
                 <li>
                     <strong onClick = { handleTittle }>Ingresos</strong>
                     <ul>
-                        <li><a href="#">Ingresos Fijos</a></li>
-                        <li><a href="#">Ingresos Extras</a></li>
+                        <li><a name='ingresos-fijos'  onClick = { handleGetPanel } href="#">Ingresos Fijos</a></li>
+                        <li><a name='ingresos-extras' onClick = { handleGetPanel } href="#">Ingresos Extras</a></li>
                         <li><a onClick = { handleShowModal } href="#">Agregar Ingreso</a></li>
                     </ul>
                 </li>

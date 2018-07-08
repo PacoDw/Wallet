@@ -1,21 +1,29 @@
 import React, { Component } from 'react';
+
+// Components
 import Header               from '../Header'
 import SideDrawer           from '../Sidedrawer'
 import Modal                from '../Modal';
 import Api                  from '../../utils';
 import MyCharts             from '../Charts';
 
+import GastosFijos          from './GastosFijos';
+import GastosImprovistos    from './GastosImprovistos';
+import IngresosExtras       from './IngresosExtras';
+import IngresosFijos        from './IngresosFijos';
 
 class index extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            user      : props.user || '',
-            showModal : false,
-            option    : '',
-            value     : '',
-            data2     : []
+            user        : props.user || '',
+            showModal   : false,
+            option      : '',
+            value       : '',
+            data2       : [],
+            showDesktop : props.showDesktop,
+            showPanel   : ''
         }
 
 
@@ -28,22 +36,50 @@ class index extends Component {
 
         this.handleGetValueInput  = this.handleGetValueInput.bind(this);
 
-        this.handleCloseModal     = this.handleCloseModal.bind(this);
 
         this.handleGetIncomeFixed = this.handleGetIncomeFixed.bind(this);
+
+        this.handlecloseSesion    = this.handlecloseSesion.bind(this);
+
+        this.handleGetPanel       = this.handleGetPanel.bind(this);
+
 
         this.handleGetIncomeFixed();
     }
 
+
+
+	handleGetPanel(e) {
+        e.preventDefault();
+        
+        let whichPanel = '';
+
+        switch(e.target.name)
+        {
+            case 'gastos-fijos':
+                whichPanel = <GastosFijos
+                              />
+            break;
+            case 'gastos-imprevistos':
+                whichPanel = <GastosImprovistos/>
+            break;
+            case 'ingresos-fijos':
+                whichPanel = <IngresosFijos/>
+            break;
+            case 'ingresos-extras':
+                whichPanel = <IngresosExtras/>
+            break
+        }
+
+		this.setState( { showPanel : whichPanel } )
+	}
+
     handleGetIncomeFixed() {
-        alert('Entro');
         Api.Income.getIncomeFixed(this.state.user.id)
             
         .then(data => {
             this.setState({ data2: data || [] })
-            console.log('Data2', this.state.user);
             // console.log('nexProps: ', nextProps.user)
-            alert('Paro');
         })
         
         .catch(err =>  console.log(err) );
@@ -87,7 +123,8 @@ class index extends Component {
 
     handlecloseSesion(e){
         e.preventDefault();
-        alert('hola');
+        this.setState( { showDesktop : false } ); 
+        window.location.reload(true);  
     }
 
 
@@ -102,12 +139,14 @@ class index extends Component {
                 <SideDrawer
                     handleTittle    = { this.handleTittle    }
                     handleShowModal = { this.handleShowModal }
+                    handleGetPanel  = { this.handleGetPanel   }
+
                 />
 
                 <Header
                     showSidedrawer = { this.handleShowSideDrawer }
                     hideSidedrawer = { this.handleHideSideDrawer }
-                    closeSesion    = { this.handleCloseModal     }
+                    closeSesion    = { this.handlecloseSesion     }
                 />
 
                 <div id="content-wrapper">
@@ -128,7 +167,9 @@ class index extends Component {
                             />
 
                         </div>
-                        
+                        <div className='mui-panel'>
+                            { this.state.showPanel }
+                        </div>                        
                     </div>
                 </div>
             </div>

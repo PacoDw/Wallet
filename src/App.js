@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import LoginAndRegister from './components/Login&Register';
 import Desktop          from './components/Desktop';
 
-import Api 	     from './utils';
-import onGetForm from './utils/onGetForm';
+import Api 	            from './utils';
+import onGetForm        from './utils/onGetForm';
 
 
 class App extends Component {
@@ -13,7 +13,7 @@ class App extends Component {
 
         this.state = {
 			user        : '',
-			showDesktop : false
+			showDesktop : true
 		 }
 
 		 this.handleLoginUser    = this.handleLoginUser.bind(this);
@@ -32,8 +32,6 @@ class App extends Component {
 
 				.then( data => {
 					this.setState( { user : data.user,  showDesktop : true } )
-
-					console.log('DATA USER: ', data);
 				})
 		})
 	}
@@ -61,7 +59,8 @@ class App extends Component {
 
 		if (this.state.showDesktop)
 			showSome = <Desktop
-							user = { this.state.user } 
+							user        = { this.state.user } 
+							showDesktop = { this.state.showDesktop }
 						/>
 		else
 			showSome = <div className='container container-Login'>	

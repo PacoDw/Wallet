@@ -38,8 +38,6 @@ class Modal extends React.Component {
         let formulario = document.querySelector('#AddOutcome');
 
 		onGetForm(formulario, ( dataForm ) => {
-                console.log('dataForm: ', dataForm);
-                alert('Paro');
                 
 			Api.Outcome
 				.addOutcome( dataForm, this.state.user.id )
