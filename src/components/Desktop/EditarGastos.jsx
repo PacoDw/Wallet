@@ -7,6 +7,7 @@ const EditarGastos = (data) => {
     let total = 0;
     let datos = data.data.map( item => {
         total += item.amount;
+        let link = `localhost:3000/outcome/deleteOutcome/${item.id_movement}`;
         return(
             <tr>
                 <td hidden>{ item.id_movement }</td>
@@ -14,7 +15,7 @@ const EditarGastos = (data) => {
                 <td>{ item.description }</td>
                 <td>{ item.amount }</td>
                 <td>
-                    <a href="">Eliminar</a>
+                    <a href={link}>Eliminar</a>
                     <a href="">Editar</a>
                 </td>
             </tr>
