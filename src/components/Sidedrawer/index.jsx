@@ -27,12 +27,8 @@ const index = ( { handleTittle, handleShowModal, handleGetPanel } ) => {
                 <li>
                 <strong onClick = { handleTittle }>Configuración</strong>
                     <ul>
-                        <li><a href="#">Item 1</a></li>
-                        <li><a href="#">Item 2</a></li>
-                        <li><a href="#">Item 3</a></li>
-                        <li><a href="#">Mi Perfil</a></li>
-                        <li><a href="#">Item 2</a></li>
-                        <li><a href="#">Cerrar sesión</a></li>
+                        <li><a href="#">Editar perfil</a></li>
+                        <li><a href="#">Vaciar cartera</a></li>
                     </ul>
                 </li>
             </ul>
