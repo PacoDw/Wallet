@@ -9,7 +9,7 @@ const index = ( { handleTittle, handleShowModal, handleGetPanel } ) => {
             <div className="mui-divider"></div>
             <ul>
                 <li>
-                    <strong    onClick = { handleTittle }>Gastos</strong>
+                    <strong onClick = { handleTittle }>Gastos</strong>
                     <ul>
                         <li><a name='gastos-fijos'       onClick = { handleGetPanel } href="#">Gastos Fijos</a></li>
                         <li><a name='gastos-imprevistos' onClick = { handleGetPanel } href="#">Gastos Imprevisto</a></li>
