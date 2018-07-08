@@ -116,6 +116,8 @@ router
 
 			.delete('/deleteItem/:id', (req, res, next) => {
 
+					console.log(req.param);
+					
 					id_movement = req.params.id;
 					const db = require('../database/config');
 

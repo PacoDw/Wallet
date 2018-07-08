@@ -51,7 +51,7 @@ IncomeApi.addIncome = function( dataForm, id ) {
 IncomeApi.deleteItem = function( id ) {
     return Promise.resolve (
         Api
-            .post(`/income/deleteItem/${id}`)
+            .delete(`/income/deleteItem/${id}`)
 
             .then( response => {
                 if (response.ok)

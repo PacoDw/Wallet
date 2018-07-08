@@ -59,13 +59,12 @@ class index extends Component {
 
         Api.Income
             .deleteItem(id_movement)
-            .then( data => {
+            .then( _ => {
+                let newData = this.state.data2.filter( item => {
+                    return item.id_movement !== id_movement;
+                })                
+                this.setState( { data2 : newData } );
 
-                console.log('Success: ', data);
-
-                console.log('Data2: ', this.state.data2);
-                
-                alert('paro');
             }  )
             .catch( error => console.log(error) ); 
 
