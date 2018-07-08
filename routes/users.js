@@ -39,13 +39,34 @@ router
 					req.body.password
 				]
 	
-				console.log(user);
 				const db = require('../database/config');
 				db.query('insert into users (email, `name`, `password`)values(?,?,?);', user, (err, rows, fields) => {
 					if (err) {
 						res.status(500).json( err );
 					} else {
 						res.status(200).json( user );
+<<<<<<< HEAD
+					}
+				})
+			})
+
+
+			.post('/editUser/:id', (req, res, next) => {
+				let user = {
+					id_user: req.params.id,
+					email: req.body.email,
+					name: req.body.username,
+					password: req.body.password
+				}
+
+				const db = require('../database/config');
+				db.query('UPDATE users set ? where ?', [user, {id_user: req.params.id}], (err, rows, fields) => {
+					if (err) {
+						res.status(500).json( err );
+					} else {
+						res.status(200).json({ user: 'Edited' });
+=======
+>>>>>>> e676ab13d2b5f6ed4e1c2f48f7733e01bf7ebf1e
 					}
 				})
 			})
@@ -53,7 +74,6 @@ router
 
 			.delete('/deleteUser/:id', (req, res, next) => {
 				let id = req.params.id;
-				// console.log(id);
 				const db = require('../database/config');
 				db.query('DELETE from users where id_user = ?', id, (err, rows, fields) => {
 					if (err) {
