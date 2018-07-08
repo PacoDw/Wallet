@@ -33,7 +33,7 @@ router
 
 			.post('/addOutcome/:id', function (req, res, next) {
 				let movement = [
-					req.body.id_movement_type,
+					req.body.movement_type,
 					req.body.amount,
 					req.body.description,
 					req.body.date,
@@ -41,6 +41,7 @@ router
 					req.params.id
 				]	
 				
+				console.log(req.body);
 				const db = require('../database/config');
 				db.query('insert into movements (id_movement_type, amount, description, date, id_frequency, id_user) values (?,?,?,?,?,?)', movement, (err, rows, fields) => {
 					if (err) {
@@ -70,7 +71,7 @@ router
 			.post('/editOutcome/:id', (req, res, next) => {
 				let movement = {
 					id_movement : req.params.id,
-					id_movement_type : req.body.id_movement_type,
+					id_movement_type : req.body.movement_type,
 					amount : req.body.amount,
 					description : req.body.description,
 					date : 	req.body.date,

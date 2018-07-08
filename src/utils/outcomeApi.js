@@ -41,7 +41,6 @@ OutcomeApi.addOutcome = function( dataForm, id  ) {
             .post(`/outcome/addOutcome/${id}`, dataForm)
 
             .then( response => {
-                console.log('API RESPONSE: ', response);
                 if (response.ok)
                     return response.json();
                 else

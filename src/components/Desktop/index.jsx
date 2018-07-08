@@ -1,19 +1,14 @@
 import React, { Component } from 'react';
 
 // Components
-import Header               from '../Header'
-import SideDrawer           from '../Sidedrawer'
-import Modal                from '../Modal';
-import Api                  from '../../utils';
-import MyCharts             from '../Charts';
+import Header       from '../Header'
+import SideDrawer   from '../Sidedrawer'
+import Modal        from '../Modal';
+import Api          from '../../utils';
+import MyCharts     from '../Charts';
 
-import GastosFijos          from './GastosFijos';
-import GastosImprovistos    from './GastosImprovistos';
-import EditarGastos         from './EditarGastos';
-
-import IngresosExtras       from './IngresosExtras';
-import IngresosFijos        from './IngresosFijos';
-import EditarIngresos       from './EditarIngresos';
+import Table        from './Table';
+import TableActions from './TableActions'
 
 class index extends Component {
     constructor(props) {
@@ -31,195 +26,144 @@ class index extends Component {
         }
 
 
-        this.handleShowSideDrawer = this.handleShowSideDrawer.bind(this);
-        this.handleHideSideDrawer = this.handleHideSideDrawer.bind(this);
-        this.handleTittle         = this.handleTittle.bind(this);
-
-        this.handleShowModal      = this.handleShowModal.bind(this);
-        this.handleCloseModal     = this.handleCloseModal.bind(this);
-
-        this.handleGetValueInput  = this.handleGetValueInput.bind(this);
-
-
-        this.handleGetIncomeFixed      = this.handleGetIncomeFixed.bind(this);
-        this.handleGetIncomeIncidental = this.handleGetIncomeIncidental.bind(this);
-        this.handleGetEditIncome       = this.handleGetEditIncome.bind(this);
-
+        this.handleShowSideDrawer       = this.handleShowSideDrawer.bind(this);
+        this.handleHideSideDrawer       = this.handleHideSideDrawer.bind(this);
+        this.handleTittle               = this.handleTittle.bind(this);
+        this.handleShowModal            = this.handleShowModal.bind(this);
+        this.handleCloseModal           = this.handleCloseModal.bind(this);
+        this.handleGetValueInput        = this.handleGetValueInput.bind(this);
+        this.handleGetIncomeFixed       = this.handleGetIncomeFixed.bind(this);
+        this.handleGetIncomeIncidental  = this.handleGetIncomeIncidental.bind(this);
+        this.handleGetEditIncome        = this.handleGetEditIncome.bind(this);
         this.handleGetOutcomeFixed      = this.handleGetOutcomeFixed.bind(this);
         this.handleGetOutcomeIncidental = this.handleGetOutcomeIncidental.bind(this);
         this.handleGetEditOutcome       = this.handleGetEditOutcome.bind(this);
-
-        this.handlecloseSesion    = this.handlecloseSesion.bind(this);
-
-        this.handleGetPanel       = this.handleGetPanel.bind(this);
-
-
-        console.log('constructor: ', props);
+        this.handlecloseSesion          = this.handlecloseSesion.bind(this);
     }
     
-    
-    
-	handleGetPanel = (e) => {
-        e.preventDefault();
-        
-        let whichPanel = '';
-        let name='';
-        switch(e.target.name)
-        {
-
-        //#################################################
-            case 'gastos-fijos':
-            name='Gastos Fijos';
-            console.log(this.state.data2)
-
-            this.handleGetOutcomeFixed()
-
-                .then(whichPanel = 
-                        <GastosFijos
-                            data = {this.state.data2}
-                        />
-                )
-
-                .catch(err =>  console.log(err) );
-
-            break;
-        //#################################################
-
-
-            case 'gastos-imprevistos':
-            name='Gastos Imprevistos';
-            this.handleGetOutcomeIncidental();
-            whichPanel = <GastosImprovistos
-                            data = {this.state.data2}
-                        />
-            break;
-
-            case 'editar-gastos':
-            name='Editar Gastos';
-            this.handleGetEditOutcome();
-            whichPanel = <EditarGastos
-                            data = {this.state.data2}
-                        />
-            break;
-
-            case 'ingresos-fijos':
-            name='Ingresos Fijos';
-            this.handleGetIncomeFixed();
-            whichPanel = <IngresosFijos
-                            data = {this.state.data2}
-                        />
-            break;
-
-            case 'ingresos-extras':
-            name='Ingresos Extras';
-            this.handleGetIncomeIncidental();
-            whichPanel = <IngresosExtras
-                            data = {this.state.data2}
-                        />
-            break;
-
-            case 'editar-ingresos':
-            name='Editar Ingresos';
-            this.handleGetEditIncome();
-            whichPanel = <EditarIngresos
-                            data = {this.state.data2}
-                            
-                        />
-            break;
-        }
-        
-		this.setState( { showPanel : whichPanel , PanelName : name} )
-	}
     
     handleGetIncomeFixed() {
-
-        Api.Income.getIncomeFixed(this.state.user.id_user)//this.state.user.id
-        
-        .then(data => {
-            this.setState({ data2: data || [] })
-            console.log(data);
-        })
-        
-        .catch(err =>  console.log(err) );
+        Api.Income
+            .getIncomeFixed(this.state.user.id_user)
+            .then(data => { 
+                this.setState( { data2: data || [] } )
+                return Promise.resolve(data); 
+            } )
+            .then( data => {
+                this.setState( {
+                     showPanel: <Table
+                                    data = { data }
+                                    title = 'Ingresos Fijos' 
+                                />
+                } )
+            } )            
+            .catch(err =>  console.log(err) );
     }
-    
 
     handleGetIncomeIncidental(){
-
-        Api.Income.getIncomeIncidental(this.state.user.id_user) //this.state.user.id
-        
-        .then(data => {
-            this.setState({ data2: data || [] })
-        })
-        
-        .catch(err =>  console.log(err) );
+        Api.Income
+            .getIncomeIncidental(this.state.user.id_user) //this.state.user.id
+            .then(data => { 
+                this.setState( { data2: data || [] } )
+                return Promise.resolve(data); 
+            } )
+            .then( data => {
+                this.setState( {
+                     showPanel: <Table
+                                    data = { data }
+                                    title = 'Ingresos Imprevistos' 
+                                />
+                } )
+            } )
+            .catch(err =>  console.log(err) );
     }
 
     handleGetEditIncome(){
-
-        Api.Income.getEditIncome(this.state.user.id_user) //this.state.user.id
-        
-        .then(data => {
-            this.setState({ data2: data || [] })
-        })
-        
-        .catch(err =>  console.log(err) );
+        Api.Income
+            .getEditIncome(this.state.user.id_user) //this.state.user.id
+            .then(data => { 
+                this.setState( { data2: data || [] } )
+                return Promise.resolve(data); 
+            } )
+            .then( data => {
+                this.setState( {
+                     showPanel: <TableActions
+                                    data = { data }
+                                    title = 'Ingresos' 
+                                />
+                } )
+            } )   
+            .catch(err =>  console.log(err) );
     }
 
-    //#################################################################################################
     handleGetOutcomeFixed = function (){
-
-        return Promise.resolve (
-
-            Api.Outcome.getOutcomeFixed(this.state.user.id_user) //this.state.user.id
-            
+        Api.Outcome
+            .getOutcomeFixed(this.state.user.id_user) //this.state.user.id
             .then(data => {
                 this.setState({ data2: data || [] })
-                console.log('asdasd', this.state.data2);
-            })
-            
+                return Promise.resolve(data); 
+            } )
+            .then( data => {
+                this.setState( {
+                     showPanel: <Table
+                                    data = { data }
+                                    title = 'Gastos Fijos' 
+                                />
+                } )
+            } )
             .catch(err =>  console.log(err) )
-        );
     }
-    //#################################################################################################
-
 
     handleGetOutcomeIncidental(){
-
-        Api.Outcome.getOutcomeIncidental(this.state.user.id_user) //this.state.user.id
-        
-        .then(data => {
-            this.setState({ data2: data || [] })
-        })
-        
-        .catch(err =>  console.log(err) );
+        Api.Outcome
+            .getOutcomeIncidental(this.state.user.id_user) //this.state.user.id
+            .then(data => { 
+                this.setState( { data2: data || [] } )
+                return Promise.resolve(data); 
+            } )
+            .then( data => {
+                this.setState( {
+                     showPanel: <Table
+                                    data = { data }
+                                    title = 'Gastos Imprevistos' 
+                                />
+                } )
+            } )
+            .catch(err =>  console.log(err) );
     }
 
     handleGetEditOutcome(){
-
-        Api.Outcome.getEditOutcome(this.state.user.id_user) //this.state.user.id
-        
-        .then(data => {
-            this.setState({ data2: data || [] })
-        })
-        
-        .catch(err =>  console.log(err) );
+        Api.Outcome
+            .getEditOutcome(this.state.user.id_user) //this.state.user.id
+            .then(data => { 
+                this.setState( { data2: data || [] } )
+                return Promise.resolve(data); 
+            } )
+            .then( data => {
+                this.setState( {
+                     showPanel: <TableActions
+                                    data = { data }
+                                    title = 'Gastos' 
+                                />
+                } )
+            } )
+            .catch(err =>  console.log(err) );
     }
 
 
     handleGetValueInput(e) {
         e.preventDefault();
-        this.setState({ value: e.target.value });
+        this.setState( { value: e.target.value } );
     }
 
     handleShowModal(e) {
         e.preventDefault();
-        this.setState({ showModal: true, option: e.target.text });
+        this.setState( { showModal: true, option: e.target.text } );
 
     }
     handleCloseModal(e) {
         e.preventDefault();
-        this.setState({ showModal: false });
+        this.setState( { showModal: false } );
     }
 
 
@@ -238,7 +182,6 @@ class index extends Component {
 
     handleTittle(e) {
         let ul = e.target.nextSibling;
-
         ul.classList.toggle('hiden-items');
     }
 
@@ -260,8 +203,12 @@ class index extends Component {
                 <SideDrawer
                     handleTittle    = { this.handleTittle    }
                     handleShowModal = { this.handleShowModal }
-                    handleGetPanel  = { this.handleGetPanel   }
-
+                    incomeFixed     = { this.handleGetIncomeFixed }
+                    outcomeFixed    = { this.handleGetOutcomeFixed }
+                    outcomeIncidental = { this.handleGetOutcomeIncidental }
+                    incomeIncidental  = { this.handleGetIncomeIncidental }
+                    editIncome = { this.handleGetEditIncome }
+                    editOutcome = { this.handleGetEditOutcome }
                 />
 
                 <Header

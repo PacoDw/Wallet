@@ -3,8 +3,6 @@ import Api from './api';
 function IncomeApi(){}
 
 IncomeApi.getIncomeFixed = function( id ) {
-
-    console.log('ID INCOME API: ', id);
     
     return Promise.resolve (
         Api
@@ -37,13 +35,11 @@ IncomeApi.getIncomeIncidental = function( id ) {
 }
 
 IncomeApi.addIncome = function( dataForm, id ) {
-    console.log('AddIncome'+id);
     return Promise.resolve (
         Api
             .post(`/income/addIncome/${id}`, dataForm)
 
             .then( response => {
-                console.log('API RESPONSE: ', response);
                 if (response.ok)
                     return response.json();
                 else

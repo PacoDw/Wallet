@@ -40,12 +40,7 @@ class Modal extends React.Component {
 		onGetForm(formulario, ( dataForm ) => {
 			Api.Outcome
 				.addOutcome( dataForm, this.state.user.id_user )
-
-				.then( data => {
-                    console.log('AddOutcome: ', data)                    
-					// this.setState( { user : data.user} )
-                })
-                
+				.then( data => console.log('AddOutcome: ', data))
                 .catch(error => console.log(error) );
 		})
 
@@ -56,17 +51,10 @@ class Modal extends React.Component {
 
         let formulario = document.querySelector('#AddIncome');
 
-        onGetForm(formulario, ( dataForm ) => {
-            console.log("Modal "+this.state.user.id_user)
-                
+        onGetForm(formulario, ( dataForm ) => {                
             Api.Income
                 .addIncome( dataForm, this.state.user.id_user )
-
-                .then( data => {
-                    console.log('AddIncome: ', data)
-                    // this.setState( { user : data.user} )
-                })
-                
+                .then( data => console.log('AddIncome: ', data) )
                 .catch(error => console.log(error) );
         })
     }
@@ -77,7 +65,7 @@ class Modal extends React.Component {
         let typeModal = '';
         let title     = '';
 
-        if ( option === 'Agregar gasto')
+        if ( option === 'Agregar Gasto')
         {
             typeModal = <AddOutcome
                             AddOutcome = { this.handleAddOutcome }
