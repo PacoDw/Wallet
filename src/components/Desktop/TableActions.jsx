@@ -1,9 +1,7 @@
 import React from 'react';
 
-const EditarIngresos = ( { data, title } ) => {
+const EditarIngresos = ( { data, title, deleteItem } ) => {
     
-    console.log('Editar Ingresos: ', data);
-
     let total = 0;
     let datos = data.map( item => {
         total += item.amount;
@@ -16,7 +14,7 @@ const EditarIngresos = ( { data, title } ) => {
                 <td>{ item.description }</td>
                 <td>{ item.amount }</td>
                 <td>
-                    <a href='#'>Eliminar</a>
+                    <a id_movement = {item.id_movement} onClick = { deleteItem } href='#'>Eliminar</a>
                     <br/>
                     <a href="#">Editar</a>
                 </td>

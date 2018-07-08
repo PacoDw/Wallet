@@ -21,7 +21,7 @@ router
 			})
 
 
-			.post('/resetApp/:id', (req, res, next) => {
+			.delete('/resetApp/:id', (req, res, next) => {
 				let id = req.params.id;
 				const db = require('../database/config');
 				db.query('delete from movements where id_user = ?', id, (err, rows, fields) => {
@@ -32,4 +32,5 @@ router
 					}
 				})
 			})
+			
 module.exports = router;

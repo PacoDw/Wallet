@@ -1,6 +1,8 @@
 import React from 'react';
 
-const index = ( { handleTittle, handleShowModal, handleGetPanel, incomeFixed, outcomeFixed, outcomeIncidental, incomeIncidental, editIncome, editOutcome } ) => {
+const index = ( { handleTittle, handleShowModal, 
+                incomeFixed, outcomeFixed, outcomeIncidental, 
+                incomeIncidental, editIncome, editOutcome, emptyWallet } ) => {
     return (
         <div id="sidedrawer" class="mui--no-user-select"> 
             <div id="sidedrawer-brand" className="mui--appbar-line-height">
@@ -30,7 +32,7 @@ const index = ( { handleTittle, handleShowModal, handleGetPanel, incomeFixed, ou
                 <strong onClick = { handleTittle }>Configuración</strong>
                     <ul>
                         <li><a href="#">Editar perfil</a></li>
-                        <li><a href="#">Vaciar cartera</a></li>
+                        <li><a onClick = { emptyWallet } href="#">Vaciar cartera</a></li>
                     </ul>
                 </li>
             </ul>

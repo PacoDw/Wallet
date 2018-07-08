@@ -48,6 +48,20 @@ IncomeApi.addIncome = function( dataForm, id ) {
     )
 }
 
+IncomeApi.deleteItem = function( id ) {
+    return Promise.resolve (
+        Api
+            .post(`/income/deleteItem/${id}`)
+
+            .then( response => {
+                if (response.ok)
+                    return response.json();
+                else
+                    return Promise.reject(response.json);
+            })
+    )
+}
+
 IncomeApi.getEditIncome = function( id ) {
 
     return Promise.resolve (

@@ -39,9 +39,38 @@ class index extends Component {
         this.handleGetOutcomeIncidental = this.handleGetOutcomeIncidental.bind(this);
         this.handleGetEditOutcome       = this.handleGetEditOutcome.bind(this);
         this.handlecloseSesion          = this.handlecloseSesion.bind(this);
+        this.handleEmptyWallet          = this.handleEmptyWallet.bind(this);
+        this.handleDeleteItem           = this.handleDeleteItem.bind(this);
     }
     
     
+    handleEmptyWallet(e) {
+        e.preventDefault();
+        Api.Setting
+            .emptyWallet(this.state.user.id_user)
+            .then( data => alert('Se ha limpiado tu cartera') )
+            .catch(err =>  console.log(err) );
+    }
+
+    handleDeleteItem(e) { 
+        e.preventDefault();
+
+        let id_movement = e.target.attributes['id_movement'].value;
+
+        Api.Income
+            .deleteItem(id_movement)
+            .then( data => {
+
+                console.log('Success: ', data);
+
+                console.log('Data2: ', this.state.data2);
+                
+                alert('paro');
+            }  )
+            .catch( error => console.log(error) ); 
+
+    }
+
     handleGetIncomeFixed() {
         Api.Income
             .getIncomeFixed(this.state.user.id_user)
@@ -62,7 +91,7 @@ class index extends Component {
 
     handleGetIncomeIncidental(){
         Api.Income
-            .getIncomeIncidental(this.state.user.id_user) //this.state.user.id
+            .getIncomeIncidental(this.state.user.id_user) 
             .then(data => { 
                 this.setState( { data2: data || [] } )
                 return Promise.resolve(data); 
@@ -80,7 +109,7 @@ class index extends Component {
 
     handleGetEditIncome(){
         Api.Income
-            .getEditIncome(this.state.user.id_user) //this.state.user.id
+            .getEditIncome(this.state.user.id_user) 
             .then(data => { 
                 this.setState( { data2: data || [] } )
                 return Promise.resolve(data); 
@@ -88,8 +117,9 @@ class index extends Component {
             .then( data => {
                 this.setState( {
                      showPanel: <TableActions
-                                    data = { data }
-                                    title = 'Ingresos' 
+                                    data  = { data }
+                                    title = 'Ingresos'
+                                    deleteItem = { this.handleDeleteItem } 
                                 />
                 } )
             } )   
@@ -98,7 +128,7 @@ class index extends Component {
 
     handleGetOutcomeFixed = function (){
         Api.Outcome
-            .getOutcomeFixed(this.state.user.id_user) //this.state.user.id
+            .getOutcomeFixed(this.state.user.id_user) 
             .then(data => {
                 this.setState({ data2: data || [] })
                 return Promise.resolve(data); 
@@ -116,7 +146,7 @@ class index extends Component {
 
     handleGetOutcomeIncidental(){
         Api.Outcome
-            .getOutcomeIncidental(this.state.user.id_user) //this.state.user.id
+            .getOutcomeIncidental(this.state.user.id_user) 
             .then(data => { 
                 this.setState( { data2: data || [] } )
                 return Promise.resolve(data); 
@@ -134,7 +164,7 @@ class index extends Component {
 
     handleGetEditOutcome(){
         Api.Outcome
-            .getEditOutcome(this.state.user.id_user) //this.state.user.id
+            .getEditOutcome(this.state.user.id_user) 
             .then(data => { 
                 this.setState( { data2: data || [] } )
                 return Promise.resolve(data); 
@@ -142,8 +172,9 @@ class index extends Component {
             .then( data => {
                 this.setState( {
                      showPanel: <TableActions
-                                    data = { data }
-                                    title = 'Gastos' 
+                                    data  = { data }
+                                    title = 'Gastos'
+                                    deleteItem = { this.handleDeleteItem } 
                                 />
                 } )
             } )
@@ -196,25 +227,24 @@ class index extends Component {
 
             let info = this.state.data2;
             const chartData = info.map(item => ({ label: item.description, value: item.amount }));
-            console.log(this.state.showPanel);
-
         return (
             <div>
                 <SideDrawer
-                    handleTittle    = { this.handleTittle    }
-                    handleShowModal = { this.handleShowModal }
-                    incomeFixed     = { this.handleGetIncomeFixed }
-                    outcomeFixed    = { this.handleGetOutcomeFixed }
+                    handleTittle      = { this.handleTittle }
+                    handleShowModal   = { this.handleShowModal }
+                    incomeFixed       = { this.handleGetIncomeFixed }
+                    outcomeFixed      = { this.handleGetOutcomeFixed }
                     outcomeIncidental = { this.handleGetOutcomeIncidental }
                     incomeIncidental  = { this.handleGetIncomeIncidental }
-                    editIncome = { this.handleGetEditIncome }
-                    editOutcome = { this.handleGetEditOutcome }
+                    editIncome        = { this.handleGetEditIncome }
+                    editOutcome       = { this.handleGetEditOutcome }
+                    emptyWallet       = { this.handleEmptyWallet }
                 />
 
                 <Header
                     showSidedrawer = { this.handleShowSideDrawer }
                     hideSidedrawer = { this.handleHideSideDrawer }
-                    closeSesion    = { this.handlecloseSesion     }
+                    closeSesion    = { this.handlecloseSesion }
                 />
 
                 <div id="content-wrapper">
@@ -226,10 +256,10 @@ class index extends Component {
                         <div className='mui-panel'>
                             
                             <Modal
-                                user             = { this.state.user       }
-                                showModal        = { this.state.showModal  }
+                                user             = { this.state.user }
+                                showModal        = { this.state.showModal }
                                 handleCloseModal = { this.handleCloseModal }
-                                option           = { this.state.option     } 
+                                option           = { this.state.option } 
                             />
 
                             <MyCharts 
