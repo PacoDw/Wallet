@@ -39,8 +39,10 @@ class index extends Component {
 
 
         this.handleGetIncomeFixed = this.handleGetIncomeFixed.bind(this);
-
         this.handleGetIncomeIncidental = this.handleGetIncomeIncidental.bind(this);
+
+        this.handleGetOutcomeFixed=this.handleGetOutcomeFixed.bind(this);
+        this.handleGetOutcomeIncidental=this.handleGetOutcomeIncidental.bind(this);
 
         this.handlecloseSesion    = this.handlecloseSesion.bind(this);
 
@@ -60,10 +62,14 @@ class index extends Component {
         switch(e.target.name)
         {
             case 'gastos-fijos':
+            name='Gastos Fijos';
+            this.handleGetOutcomeFixed();
             whichPanel = <GastosFijos/>
             break;
 
             case 'gastos-imprevistos':
+            name='Gastos Imprevistos';
+            this.handleGetOutcomeIncidental();
             whichPanel = <GastosImprovistos/>
             break;
 
@@ -87,9 +93,7 @@ class index extends Component {
     handleGetIncomeFixed() {
         alert("entro al income fixed");
 
-        Api.Income.
-        
-        getIncomeFixed(this.state.user.id_user)//this.state.user.id
+        Api.Income.getIncomeFixed(this.state.user.id_user)//this.state.user.id
         
         .then(data => {
             this.setState({ data2: data || [] })
@@ -104,6 +108,33 @@ class index extends Component {
     handleGetIncomeIncidental(){
         alert("entro al income Incidental");
         Api.Income.getIncomeIncidental(this.state.user.id_user) //this.state.user.id
+        
+        .then(data => {
+            this.setState({ data2: data || [] })
+            // console.log('nexProps: ', nextProps.user)
+        })
+        
+        .catch(err =>  console.log(err) );
+    }
+
+    handleGetOutcomeFixed(){
+
+        console.log(this);
+        alert("entro al outcome fixed");
+        Api.Outcome.getOutcomeFixed(this.state.user.id_user) //this.state.user.id
+        
+        .then(data => {
+            console.log(data);
+            this.setState({ data2: data || [] })
+            // console.log('nexProps: ', nextProps.user)
+        })
+        
+        .catch(err =>  console.log(err) );
+    }
+
+    handleGetOutcomeIncidental(){
+        alert("entro al income Incidental");
+        Api.Outcome.getOutcomeIncidental(this.state.user.id_user) //this.state.user.id
         
         .then(data => {
             this.setState({ data2: data || [] })
@@ -160,6 +191,7 @@ class index extends Component {
 
             //console.log('State: ' + this.state.data2);
             let info = this.state.data2;
+            console.log(info);
             const chartData = info.map(item => ({ label: item.description, value: item.amount }));
             console.log(this.state.showPanel);
 

@@ -6,12 +6,12 @@ router
 			.get('/getOutcomeFixed/:id', function (req, res, next) {
 				const db = require('../database/config');	
 				let id = req.params.id;
-				db.query('select amount, description from movements where id_movement_type = "Gasto Fijo" && id_user = ?',id , (err, rows, fields) => {
+				db.query('select amount, description from movements where id_movement_type = 3 && id_user = ?',id , (err, rows, fields) => {
 					console.log(rows);
 					if (err) {
 						res.status(500).json({ err });
 					} else {
-						res.status(200).json({ ok: rows[0] });
+						res.status(200).json( rows );
 					}
 				})
 			})
@@ -20,12 +20,12 @@ router
 			.get('/getOutcomeIncidental/:id', function (req, res, next) {
 				const db = require('../database/config');	
 				let id = req.params.id;
-				db.query('select amount, description from movements where id_movement_type = "Gasto Imprevisto" && id_user = ?',id , (err, rows, fields) => {
+				db.query('select amount, description from movements where id_movement_type = 4 && id_user = ?',id , (err, rows, fields) => {
 					console.log(rows);
 					if (err) {
 						res.status(500).json( err );
 					} else {
-						res.status(200).json({ ok: rows[0] });
+						res.status(200).json(rows );
 					}
 				})
 			})

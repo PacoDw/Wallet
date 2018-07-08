@@ -45,7 +45,6 @@ router
 						res.status(500).json( err );
 					} else {
 						res.status(200).json( user );
-<<<<<<< HEAD
 					}
 				})
 			})
@@ -65,8 +64,6 @@ router
 						res.status(500).json( err );
 					} else {
 						res.status(200).json({ user: 'Edited' });
-=======
->>>>>>> e676ab13d2b5f6ed4e1c2f48f7733e01bf7ebf1e
 					}
 				})
 			})
