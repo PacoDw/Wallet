@@ -34,7 +34,7 @@ router
 
 			.post('/addIncome/:id', (req, res, next) => {
 				let movement = [
-					req.body.id_movement_type,
+					req.body.movement_type,
 					req.body.amount,
 					req.body.description,
 					req.body.date,

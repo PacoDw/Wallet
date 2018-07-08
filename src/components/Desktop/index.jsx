@@ -91,7 +91,7 @@ class index extends Component {
 	}
     
     handleGetIncomeFixed() {
-        alert("entro al income fixed");
+        //alert("entro al income fixed");
 
         Api.Income.getIncomeFixed(this.state.user.id_user)//this.state.user.id
         
@@ -106,7 +106,7 @@ class index extends Component {
     
 
     handleGetIncomeIncidental(){
-        alert("entro al income Incidental");
+        //alert("entro al income Incidental");
         Api.Income.getIncomeIncidental(this.state.user.id_user) //this.state.user.id
         
         .then(data => {
@@ -119,8 +119,8 @@ class index extends Component {
 
     handleGetOutcomeFixed(){
 
-        console.log(this);
-        alert("entro al outcome fixed");
+       // console.log(this);
+        //alert("entro al outcome fixed");
         Api.Outcome.getOutcomeFixed(this.state.user.id_user) //this.state.user.id
         
         .then(data => {
@@ -133,7 +133,7 @@ class index extends Component {
     }
 
     handleGetOutcomeIncidental(){
-        alert("entro al income Incidental");
+        //alert("entro al income Incidental");
         Api.Outcome.getOutcomeIncidental(this.state.user.id_user) //this.state.user.id
         
         .then(data => {

@@ -38,9 +38,8 @@ class Modal extends React.Component {
         let formulario = document.querySelector('#AddOutcome');
 
 		onGetForm(formulario, ( dataForm ) => {
-                
 			Api.Outcome
-				.addOutcome( dataForm, this.state.user.id )
+				.addOutcome( dataForm, this.state.user.id_user )
 
 				.then( data => {
                     console.log('AddOutcome: ', data)                    
@@ -58,9 +57,10 @@ class Modal extends React.Component {
         let formulario = document.querySelector('#AddIncome');
 
         onGetForm(formulario, ( dataForm ) => {
+            console.log("Modal "+this.state.user.id_user)
                 
             Api.Income
-                .addIncome( dataForm, this.state.user.id )
+                .addIncome( dataForm, this.state.user.id_user )
 
                 .then( data => {
                     console.log('AddIncome: ', data)

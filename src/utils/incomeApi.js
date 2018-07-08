@@ -37,7 +37,7 @@ IncomeApi.getIncomeIncidental = function( id ) {
 }
 
 IncomeApi.addIncome = function( dataForm, id ) {
-
+    console.log('AddIncome'+id);
     return Promise.resolve (
         Api
             .post(`/income/addIncome/${id}`, dataForm)
