@@ -1,12 +1,14 @@
 import React from 'react';
 
-const EditarIngresos = (data) => {
+const EditarIngresos = ({data}) => {
     
     console.log('Editar Ingresos: ', data);
 
     let total = 0;
     let datos = data.data.map( item => {
         total += item.amount;
+        let link = `localhost:3000/income/deleteIncome/${item.id_movement}`;
+
         return(
             <tr>
                 <td hidden>{ item.id_movement }</td>
@@ -14,8 +16,8 @@ const EditarIngresos = (data) => {
                 <td>{ item.description }</td>
                 <td>{ item.amount }</td>
                 <td>
-                    <a href="" className={item.id_movement}>Eliminar</a><br></br>
-                    <a href="" className={item.id_movement}>Editar</a>
+                    <a onClick = {  } href='#'>Eliminar</a>
+                    <a href="">Editar</a>
                 </td>
             </tr>
         )

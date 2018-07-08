@@ -123,6 +123,7 @@ class index extends Component {
             this.handleGetEditIncome();
             whichPanel = <EditarIngresos
                             data = {this.state.data2}
+                            
                         />
             break;
         }
