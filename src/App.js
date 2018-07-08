@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
 import LoginAndRegister from './components/Login&Register';
-import Desktop from './components/Desktop';
+import Desktop          from './components/Desktop';
 
-import Api 	     from './utils';
-import onGetForm from './utils/onGetForm';
+import Api 	            from './utils';
+import onGetForm        from './utils/onGetForm';
 
 
 class App extends Component {
@@ -13,8 +13,7 @@ class App extends Component {
 
         this.state = {
 			user        : '',
-			showDesktop : true
-
+			showDesktop : false
 		 }
 
 		 this.handleLoginUser    = this.handleLoginUser.bind(this);
@@ -30,7 +29,6 @@ class App extends Component {
 				
 			Api.User
 				.addUser( dataForm )
-
 				.then( data => {
 					this.setState( { user : data.user,  showDesktop : true } )
 				})
@@ -46,12 +44,10 @@ class App extends Component {
 				
 			Api.User
 				.loginUser( dataForm )
-
 				.then( data => {
-					this.setState( { user : data.user,  showDesktop : true } )
-
+					console.log('Setiando: ', data);
+					this.setState( { user : data,  showDesktop : true } )
 				})
-
 				.catch(err => console.log('ERROR: ', err));
 		})
 	}
@@ -60,7 +56,10 @@ class App extends Component {
 		let showSome = '';
 
 		if (this.state.showDesktop)
-			showSome = <Desktop />
+			showSome = <Desktop
+							user        = { this.state.user } 
+							showDesktop = { this.state.showDesktop }
+						/>
 		else
 			showSome = <div className='container container-Login'>	
 				<LoginAndRegister 
@@ -71,7 +70,7 @@ class App extends Component {
 				  
 		return (
 			<div>
-					{ showSome }
+				{ showSome }
 			</div>
 		);
 	}

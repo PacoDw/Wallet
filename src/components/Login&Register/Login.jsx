@@ -5,7 +5,7 @@ import Input  from '../Input';
 import Button from '../Buttom';
 
 
-const Login = ( { handleGetValueInput, loginUser } ) => {
+const Login = ( { loginUser } ) => {
     return (
         <form id='LoginForm' action="">
             <Input
