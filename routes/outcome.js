@@ -6,7 +6,7 @@ router
 			.get('/getOutcomeFixed/:id', function (req, res, next) {
 				const db = require('../database/config');	
 				let id = req.params.id;
-				db.query('select amount, description from movements where id_movement_type = "Gasto Fijo" && id_wallet = ?',id , (err, rows, fields) => {
+				db.query('select amount, description from movements where id_movement_type = "Gasto Fijo" && id_user = ?',id , (err, rows, fields) => {
 					console.log(rows);
 					if (err) {
 						res.status(500).json({ err });
@@ -20,7 +20,7 @@ router
 			.get('/getOutcomeIncidental/:id', function (req, res, next) {
 				const db = require('../database/config');	
 				let id = req.params.id;
-				db.query('select amount, description from movements where id_movement_type = "Gasto Imprevisto" && id_wallet = ?',id , (err, rows, fields) => {
+				db.query('select amount, description from movements where id_movement_type = "Gasto Imprevisto" && id_user = ?',id , (err, rows, fields) => {
 					console.log(rows);
 					if (err) {
 						res.status(500).json( err );
@@ -42,7 +42,7 @@ router
 				]	
 				
 				const db = require('../database/config');
-				db.query('insert into movements (id_movement_type, amount, description, date, id_frequency, id_wallet) values (?,?,?,?,?,?)', movement, (err, rows, fields) => {
+				db.query('insert into movements (id_movement_type, amount, description, date, id_frequency, id_user) values (?,?,?,?,?,?)', movement, (err, rows, fields) => {
 					if (err) {
 						console.log(err);
 						res.status(500).json( err );
@@ -56,7 +56,7 @@ router
 			.get('/getOutcome/:id', function (req, res, next) {
 				const db = require('../database/config');	
 				let id = req.params.id;
-				db.query("Select * from movements where id_wallet = ? AND id_movement_type = (SELECT id_movement_type WHERE id_movement_type between 3 AND 4);",id , (err, rows, fields) => {
+				db.query("Select * from movements where id_user = ? AND id_movement_type = (SELECT id_movement_type WHERE id_movement_type between 3 AND 4);",id , (err, rows, fields) => {
 					console.log(rows);
 					if (err) {
 						res.status(500).json( err);
@@ -75,7 +75,7 @@ router
 					description : req.body.description,
 					date : 	req.body.date,
 					id_frequency : req.body.id_frequency,
-					id_wallet : req.body.id_wallet
+					id_user : req.body.id_wallet
 				}
 				
 				const db = require('../database/config');

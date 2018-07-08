@@ -7,7 +7,7 @@ router
 				let id = req.params.id;
 				
 				const db = require('../database/config');	
-				db.query('select amount, description from movements where id_movement_type = 1 && id_wallet = ?',id , (err, rows, fields) => {
+				db.query('select amount, description from movements where id_movement_type = 1 && id_user = ?',id , (err, rows, fields) => {
 					console.log(rows);
 					if (err) {
 						res.status(500).json({ err });
@@ -21,7 +21,7 @@ router
 			.get('/getIncomeIncidental/:id', (req, res, next) => {
 				const db = require('../database/config');	
 				let id = req.params.id;
-				db.query('select amount, description from movements where id_movement_type = 2 && id_wallet = ?',id , (err, rows, fields) => {
+				db.query('select amount, description from movements where id_movement_type = 2 && id_user = ?',id , (err, rows, fields) => {
 					console.log(rows);
 					if (err) {
 						res.status(500).json( err );
