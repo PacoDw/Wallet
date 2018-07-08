@@ -43,7 +43,7 @@ router
 				]	
 				
 				const db = require('../database/config');
-				db.query('insert into movements (id_movement_type, amount, description, date, id_frequency, id_wallet) values (?,?,?,?,?,?)', movement, (err, rows, fields) => {
+				db.query('insert into movements (id_movement_type, amount, description, date, id_frequency, id_user) values (?,?,?,?,?,?)', movement, (err, rows, fields) => {
 					if (err) {
 						res.status(500).json( err );
 					} else {
@@ -56,7 +56,7 @@ router
 			.get('/getIncome/:id', function (req, res, next) {
 				const db = require('../database/config');	
 				let id = req.params.id;
-				db.query("Select * from movements where id_wallet = ? AND id_movement_type = (SELECT id_movement_type WHERE id_movement_type between 1 AND 2);",id , (err, rows, fields) => {
+				db.query("Select * from movements where id_user = ? AND id_movement_type = (SELECT id_movement_type WHERE id_movement_type between 1 AND 2);",id , (err, rows, fields) => {
 					if (err) {
 						res.status(500).json( err );
 					} else {
@@ -74,7 +74,7 @@ router
 					description : req.body.description,
 					date : 	req.body.date,
 					id_frequency : req.body.id_frequency,
-					id_wallet : req.body.id_wallet
+					id_user : req.body.id_wallet
 				}
 				
 				const db = require('../database/config');
