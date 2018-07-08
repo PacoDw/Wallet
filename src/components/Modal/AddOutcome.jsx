@@ -13,8 +13,8 @@ const AddOutcome = ( { AddOutcome } ) => {
         <form id='AddOutcome' action="">
             <Select name="movement_type" id="" defaultValue="0">
                 <Option id='0' value="0" label='Tipo de movimiento' disabled         />
-                <Option id='1' value="1" label='Ingreso Fijo'       />
-                <Option id='2' value="2" label='Ingreso Imprevisto' />
+                <Option id='1' value="1" label='Gasto Fijo'       />
+                <Option id='2' value="2" label='Gasto Imprevisto' />
             </Select>
       
             <Select name="id_frequency" id="" defaultValue="0">

@@ -88,4 +88,18 @@ router
 				})
 			})
 
+
+			.delete('/deleteIncome/:id', (req, res, next) => {
+				id_movement = req.params.id;
+				const db = require('../database/config');
+				db.query('delete from movements where id_movement = ?', id_movement, (err, rows, fields) => {
+					if (err) {
+						console.log(err);
+						res.status(500).json( err );
+					} else {
+						res.status(200).json({ Movement: 'Deleted' });
+					}
+				});
+			});
+
 module.exports = router;

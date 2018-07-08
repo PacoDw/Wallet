@@ -50,5 +50,20 @@ OutcomeApi.addOutcome = function( dataForm, id  ) {
     )
 }
 
+OutcomeApi.getEditOutcome = function( id ) {
+
+    return Promise.resolve (
+        Api
+            .get(`/outcome/getOutcome/${id}`)
+
+            .then( response => {
+                console.log('API RESPONSE: ', response);
+                if (response.ok)
+                    return response.json();
+                else
+                    return Promise.reject(response.json);
+            })
+    )
+}
 
 export default OutcomeApi;
