@@ -15,171 +15,33 @@ class index extends Component {
         super(props);
 
         this.state = {
-            user        : props.user || '',
-            showModal   : false,
-            option      : '',
-            value       : '',
-            data2       : [],
-            showDesktop : props.showDesktop,
-            showPanel   : '',
-            PanelName   : ''
+            user          : props.user || '',
+            showModal     : false,
+            option        : '',
+            value         : '',
+            movementsData : [],
+            showDesktop   : props.showDesktop,
+            showTable     : '',
+            PanelName     : ''
         }
 
 
         this.handleShowSideDrawer       = this.handleShowSideDrawer.bind(this);
         this.handleHideSideDrawer       = this.handleHideSideDrawer.bind(this);
-        this.handleTittle               = this.handleTittle.bind(this);
         this.handleShowModal            = this.handleShowModal.bind(this);
         this.handleCloseModal           = this.handleCloseModal.bind(this);
         this.handleGetValueInput        = this.handleGetValueInput.bind(this);
-        this.handleGetIncomeFixed       = this.handleGetIncomeFixed.bind(this);
-        this.handleGetIncomeIncidental  = this.handleGetIncomeIncidental.bind(this);
-        this.handleGetEditIncome        = this.handleGetEditIncome.bind(this);
-        this.handleGetOutcomeFixed      = this.handleGetOutcomeFixed.bind(this);
-        this.handleGetOutcomeIncidental = this.handleGetOutcomeIncidental.bind(this);
-        this.handleGetEditOutcome       = this.handleGetEditOutcome.bind(this);
         this.handlecloseSesion          = this.handlecloseSesion.bind(this);
-        this.handleEmptyWallet          = this.handleEmptyWallet.bind(this);
-        this.handleDeleteItem           = this.handleDeleteItem.bind(this);
     }
     
     
-    handleEmptyWallet(e) {
-        e.preventDefault();
-        Api.Setting
-            .emptyWallet(this.state.user.id_user)
-            .then( data => alert('Se ha limpiado tu cartera') )
-            .catch(err =>  console.log(err) );
+    handleMovementsData( data ) {
+        this.setState( { movementsData : data } );
     }
 
-    handleDeleteItem(e) { 
-        e.preventDefault();
-
-        let id_movement = e.target.attributes['id_movement'].value;
-
-        Api.Income
-            .deleteItem(id_movement)
-            .then( _ => {
-                let newData = this.state.data2.filter( item => {
-                    return item.id_movement !== id_movement;
-                })                
-                this.setState( { data2 : newData } );
-
-            }  )
-            .catch( error => console.log(error) ); 
-
+    handleShowTable( table ) {
+        this.setState( { showTable : table } );
     }
-
-    handleGetIncomeFixed() {
-        Api.Income
-            .getIncomeFixed(this.state.user.id_user)
-            .then(data => { 
-                this.setState( { data2: data || [] } )
-                return Promise.resolve(data); 
-            } )
-            .then( data => {
-                this.setState( {
-                     showPanel: <Table
-                                    data = { data }
-                                    title = 'Ingresos Fijos' 
-                                />
-                } )
-            } )            
-            .catch(err =>  console.log(err) );
-    }
-
-    handleGetIncomeIncidental(){
-        Api.Income
-            .getIncomeIncidental(this.state.user.id_user) 
-            .then(data => { 
-                this.setState( { data2: data || [] } )
-                return Promise.resolve(data); 
-            } )
-            .then( data => {
-                this.setState( {
-                     showPanel: <Table
-                                    data = { data }
-                                    title = 'Ingresos Imprevistos' 
-                                />
-                } )
-            } )
-            .catch(err =>  console.log(err) );
-    }
-
-    handleGetEditIncome(){
-        Api.Income
-            .getEditIncome(this.state.user.id_user) 
-            .then(data => { 
-                this.setState( { data2: data || [] } )
-                return Promise.resolve(data); 
-            } )
-            .then( data => {
-                this.setState( {
-                     showPanel: <TableActions
-                                    data  = { data }
-                                    title = 'Ingresos'
-                                    deleteItem = { this.handleDeleteItem } 
-                                />
-                } )
-            } )   
-            .catch(err =>  console.log(err) );
-    }
-
-    handleGetOutcomeFixed = function (){
-        Api.Outcome
-            .getOutcomeFixed(this.state.user.id_user) 
-            .then(data => {
-                this.setState({ data2: data || [] })
-                return Promise.resolve(data); 
-            } )
-            .then( data => {
-                this.setState( {
-                     showPanel: <Table
-                                    data = { data }
-                                    title = 'Gastos Fijos' 
-                                />
-                } )
-            } )
-            .catch(err =>  console.log(err) )
-    }
-
-    handleGetOutcomeIncidental(){
-        Api.Outcome
-            .getOutcomeIncidental(this.state.user.id_user) 
-            .then(data => { 
-                this.setState( { data2: data || [] } )
-                return Promise.resolve(data); 
-            } )
-            .then( data => {
-                this.setState( {
-                     showPanel: <Table
-                                    data = { data }
-                                    title = 'Gastos Imprevistos' 
-                                />
-                } )
-            } )
-            .catch(err =>  console.log(err) );
-    }
-
-    handleGetEditOutcome(){
-        Api.Outcome
-            .getEditOutcome(this.state.user.id_user) 
-            .then(data => { 
-                this.setState( { data2: data || [] } )
-                return Promise.resolve(data); 
-            } )
-            .then( data => {
-                this.setState( {
-                     showPanel: <TableActions
-                                    data  = { data }
-                                    title = 'Gastos'
-                                    deleteItem = { this.handleDeleteItem } 
-                                />
-                } )
-            } )
-            .catch(err =>  console.log(err) );
-    }
-
 
     handleGetValueInput(e) {
         e.preventDefault();
@@ -210,11 +72,6 @@ class index extends Component {
         document.querySelector('body').classList.toggle('hide-sidedrawer');
     }
 
-    handleTittle(e) {
-        let ul = e.target.nextSibling;
-        ul.classList.toggle('hiden-items');
-    }
-
     handlecloseSesion(e){
         e.preventDefault();
         this.setState( { showDesktop : false } ); 
@@ -224,20 +81,16 @@ class index extends Component {
 
     render() {
 
-            let info = this.state.data2;
+            let info = this.state.movementsData;
             const chartData = info.map(item => ({ label: item.description, value: item.amount }));
         return (
             <div>
                 <SideDrawer
-                    handleTittle      = { this.handleTittle }
+                    user = { this.state.user }
+                    handleMovementsData = { this.handleMovementsData }
+                    handleShowTable = { this.handleShowTable }
+
                     handleShowModal   = { this.handleShowModal }
-                    incomeFixed       = { this.handleGetIncomeFixed }
-                    outcomeFixed      = { this.handleGetOutcomeFixed }
-                    outcomeIncidental = { this.handleGetOutcomeIncidental }
-                    incomeIncidental  = { this.handleGetIncomeIncidental }
-                    editIncome        = { this.handleGetEditIncome }
-                    editOutcome       = { this.handleGetEditOutcome }
-                    emptyWallet       = { this.handleEmptyWallet }
                 />
 
                 <Header
@@ -250,7 +103,7 @@ class index extends Component {
                     <div class="mui--appbar-height"></div>
                     <div class="mui-container-fluid">
                         <div className='mui-panel'>
-                            { this.state.showPanel }
+                            { this.state.showTable }
                         </div>                        
                         <div className='mui-panel'>
                             
