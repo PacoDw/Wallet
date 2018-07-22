@@ -5,6 +5,9 @@ const cookieParser   = require('cookie-parser');
 const logger         = require('morgan');
 const cors           = require('cors');
 
+// Set the enviroment variables-----------------------------------------------------
+require('dotenv').config();
+
 const usersRouter    = require('./routes/users');
 const incomeRouter   = require('./routes/income');
 const outcomeRouter  = require('./routes/outcome');

@@ -1,20 +1,20 @@
 const mysql = require('mysql');
 
 let db = mysql.createConnection({
-    host        : '192.168.0.203',
-    user        : 'Admin',
-    password    : '301198050913',
-    database    : 'wallet2',
+    host        : process.env.DB_HOST,
+    user        : process.env.DB_USER,
+    password    : process.env.DB_PASS,
+    database    : process.env.DB_NAME,
     dateStrings : true
 });
 
-db.connect((err)=>{
-    if(err){
+db.connect( err =>{
+    if( err ) { 
         console.log('Hubo error en la conexíon.');
         throw err;  
-    } else {
-        console.log('Está conectado!')
     }
-})
+    else 
+        console.log('Está conectado!')
+});
 
 module.exports = db;
